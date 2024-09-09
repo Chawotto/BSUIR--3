@@ -1,3 +1,6 @@
+
+Build Status Quality Gate Status
+
 # MorrS
 MorrS - это виртуальный локальный магазин игр. 
 # Функции

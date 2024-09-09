@@ -24,11 +24,11 @@ MorrS - это виртуальный локальный магазин игр.
 
 - `dev_opt.cpp`
 - `dev_opt.h`
-- 'gam_opt.cpp'
-- 'gam_opt.cpp.h'
-- 'user_interfaces.cpp'
-- 'user_interfaces.h'
-- 'main.cpp'
+- `gam_opt.cpp`
+- `gam_opt.cpp.h`
+- `user_interfaces.cpp`
+- `user_interfaces.h`
+- `main.cpp`
 
 == Ссылка на Sonar
 

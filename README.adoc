@@ -1,7 +1,7 @@
 :uri-qg-status: https://sonarcloud.io/project/overview?id=Chawotto_MorrS
 :img-qg-status: https://sonarcloud.io/api/project_badges/measure?project=Chawotto_MorrS&metric=alert_status
-:uri-build-status: https://github.com/sonarsource-cfamily-examples/windows-cmake-gh-actions-sc/actions/workflows/build.yml
-:img-build-status: https://github.com/sonarsource-cfamily-examples/windows-cmake-gh-actions-sc/actions/workflows/build.yml/badge.svg
+:uri-build-status: https://github.com/Chawotto/MorrS/actions/workflows/build.yml
+:img-build-status: https://github.com/Chawotto/MorrS/actions/workflows/build.yml/badge.svg
 
 image:{img-build-status}[Build Status, link={uri-build-status}]
 image:{img-qg-status}[Quality Gate Status,link={uri-qg-status}]

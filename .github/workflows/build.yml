@@ -10,11 +10,11 @@ jobs:
     name: Build and analyze
     runs-on: windows-latest
     env:
-      BUILD_WRAPPER_OUT_DIR: C:\Users\Morra\Desktop\BSUIR\build # Directory where build-wrapper output will be placed
+      BUILD_WRAPPER_OUT_DIR: C:\Users\Morra\Desktop\BSUIR\build
     steps:
       - uses: actions/checkout@v4
         with:
-          fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
+          fetch-depth: 0
       - name: Install sonar-scanner and build-wrapper
         uses: SonarSource/sonarcloud-github-c-cpp@v3
       - name: Run build-wrapper

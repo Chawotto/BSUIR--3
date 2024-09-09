@@ -1,5 +1,10 @@
+:uri-qg-status: https://sonarcloud.io/dashboard?id=sonarsource-cfamily-examples_windows-cmake-gh-actions-sc
+:img-qg-status: https://sonarcloud.io/api/project_badges/measure?project=sonarsource-cfamily-examples_windows-cmake-gh-actions-sc&metric=alert_status
+:uri-build-status: https://github.com/sonarsource-cfamily-examples/windows-cmake-gh-actions-sc/actions/workflows/build.yml
+:img-build-status: https://github.com/sonarsource-cfamily-examples/windows-cmake-gh-actions-sc/actions/workflows/build.yml/badge.svg
 
-Build Status Quality Gate Status
+image:{img-build-status}[Build Status, link={uri-build-status}]
+image:{img-qg-status}[Quality Gate Status,link={uri-qg-status}]
 
 # MorrS
 MorrS - это виртуальный локальный магазин игр. 

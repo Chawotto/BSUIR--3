@@ -32,4 +32,4 @@ MorrS - это виртуальный локальный магазин игр.
 
 == Ссылка на Sonar
 
-https://sonarcloud.io/project/overview?id=Chawotto_MorrS
+- https://sonarcloud.io/project/overview?id=Chawotto_MorrS

@@ -18,17 +18,17 @@ jobs:
           fetch-depth: 0 # Shallow clones should be disabled for a better relevancy of analysis
       - name: Install Qt6
         run: |
-          choco install qt6 --version=6.5.0 --params="--installDir=C:/Qt/6.5.0"
+          choco install qt6 --version=6.4.2.20240808 --params="--installDir=C:/Qt/6.5.0" || echo "Qt6 installation failed."
       - name: Install sonar-scanner and build-wrapper
         uses: sonarsource/sonarcloud-github-c-cpp@v3
       - name: Run build-wrapper
         run: |
-          New-Item -ItemType directory -Path build
+          New-Item -ItemType directory -Path build -Force # Создает папку build, если она не существует
           cmake -S . -B build -DCMAKE_PREFIX_PATH="${{ env.CMAKE_PREFIX_PATH }}"
           build-wrapper-win-x86-64 --out-dir ${{ env.BUILD_WRAPPER_OUT_DIR }} cmake --build build/ --config Release
       - name: Run sonar-scanner
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }} # Put the name of your token here
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }} # Укажите имя вашего токена
         run: |
           sonar-scanner --define sonar.cfamily.compile-commands="${{ env.BUILD_WRAPPER_OUT_DIR }}/compile_commands.json"

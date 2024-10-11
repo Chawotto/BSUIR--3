@@ -18,7 +18,7 @@ jobs:
           fetch-depth: 0 # Shallow clones should be disabled for a better relevancy of analysis
       - name: Install Qt6
         run: |
-          choco install qt6 --version=6.4.2.20240808 --params="--installDir=C:/Qt/6.5.0" || echo "Qt6 installation failed."
+          choco install qt6-base-dev
       - name: Install sonar-scanner and build-wrapper
         uses: sonarsource/sonarcloud-github-c-cpp@v3
       - name: Run build-wrapper

@@ -11,16 +11,20 @@ jobs:
     runs-on: windows-latest
     env:
       BUILD_WRAPPER_OUT_DIR: build_wrapper_output_directory # Directory where build-wrapper output will be placed
+      CMAKE_PREFIX_PATH: "C:/Qt/6.*/msvc2019_64/lib/cmake" # Укажите правильный путь к Qt6
     steps:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0 # Shallow clones should be disabled for a better relevancy of analysis
+      - name: Install Qt6
+        run: |
+          choco install qt6 --version=6.5.0 --params="--installDir=C:/Qt/6.5.0"
       - name: Install sonar-scanner and build-wrapper
         uses: sonarsource/sonarcloud-github-c-cpp@v3
       - name: Run build-wrapper
         run: |
           New-Item -ItemType directory -Path build
-          cmake -S . -B build
+          cmake -S . -B build -DCMAKE_PREFIX_PATH="${{ env.CMAKE_PREFIX_PATH }}"
           build-wrapper-win-x86-64 --out-dir ${{ env.BUILD_WRAPPER_OUT_DIR }} cmake --build build/ --config Release
       - name: Run sonar-scanner
         env:

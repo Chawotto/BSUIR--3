@@ -9,7 +9,7 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
 
     steps:
     - uses: actions/checkout@v2
@@ -18,20 +18,20 @@ jobs:
       uses: jurplel/install-qt-action@v2
       with:
         version: '5.15.2'
-        host: ubuntu
+        host: windows
         target: desktop
-        arch: gcc_64
+        arch: win64_msvc2019_64
 
     - name: Build with CMake
       run: |
         mkdir build
         cd build
-        cmake .. -DCMAKE_PREFIX_PATH=$HOME/Qt/5.15.2/gcc_64
+        cmake .. -DCMAKE_PREFIX_PATH="C:/Qt/5.15.2/msvc2019_64"
         cmake --build .
 
     - name: Run SonarCloud Scan
       env:
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
       run: |
-        build-wrapper-linux-x86-64 --out-dir bw-output cmake --build .
+        build-wrapper-win-x86-64 --out-dir bw-output cmake --build .
         sonar-scanner

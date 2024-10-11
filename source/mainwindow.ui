@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QWidget" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>851</width>
+    <height>551</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>MorrS</string>
+  </property>
+  <widget class="QWidget" name="centralwidget" native="true">
+   <property name="geometry">
+    <rect>
+     <x>240</x>
+     <y>220</y>
+     <width>400</width>
+     <height>300</height>
+    </rect>
+   </property>
+   <widget class="QPushButton" name="developerButton">
+    <property name="geometry">
+     <rect>
+      <x>110</x>
+      <y>20</y>
+      <width>151</width>
+      <height>61</height>
+     </rect>
+    </property>
+    <property name="tabletTracking">
+     <bool>false</bool>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">
+      QPushButton {
+          background-color: #3498DB;
+          color: white;
+          border-radius: 20px;
+          padding: 10px;
+      }
+      QPushButton:hover {
+          background-color: #2980B9;
+      }
+     </string>
+    </property>
+    <property name="text">
+     <string>Developer</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="gamerButton">
+    <property name="geometry">
+     <rect>
+      <x>110</x>
+      <y>100</y>
+      <width>151</width>
+      <height>61</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string>
+      QPushButton {
+          background-color: #E74C3C;
+          color: white;
+          border-radius: 20px;
+          padding: 10px;
+      }
+      QPushButton:hover {
+          background-color: #C0392B;
+      }
+     </string>
+    </property>
+    <property name="text">
+     <string>Gamer</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="exitButton">
+    <property name="geometry">
+     <rect>
+      <x>110</x>
+      <y>180</y>
+      <width>151</width>
+      <height>61</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string>
+      QPushButton {
+          background-color: #1ABC9C;
+          color: white;
+          border-radius: 20px;
+          padding: 10px;
+      }
+      QPushButton:hover {
+          background-color: #16A085;
+      }
+     </string>
+    </property>
+    <property name="text">
+     <string>Exit</string>
+    </property>
+   </widget>
+   <widget class="QTextEdit" name="outputTextArea">
+    <property name="geometry">
+     <rect>
+      <x>50</x>
+      <y>300</y>
+      <width>500</width>
+      <height>150</height>
+     </rect>
+    </property>
+    <property name="readOnly">
+     <bool>true</bool>
+    </property>
+   </widget>
+  </widget>
+  <widget class="QStatusBar" name="statusbar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>3</width>
+     <height>21</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QLabel" name="logoLabel">
+   <property name="geometry">
+    <rect>
+     <x>340</x>
+     <y>50</y>
+     <width>161</width>
+     <height>161</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">  QPushButton {
+          
+          border-radius: 20px;
+         
+      }</string>
+   </property>
+   <property name="pixmap">
+    <pixmap>Images/logo.png</pixmap>
+   </property>
+   <property name="scaledContents">
+    <bool>true</bool>
+   </property>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

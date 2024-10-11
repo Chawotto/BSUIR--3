@@ -1,0 +1,5 @@
+"D:\Programs\CLion 2024.2.2\bin\cmake\win\x64\bin\cmake.exe" -DCMAKE_BUILD_TYPE=Debug "-DCMAKE_MAKE_PROGRAM=D:/Programs/CLion 2024.2.2/bin/ninja/win/x64/ninja.exe" -DCMAKE_PREFIX_PATH=C:\Qt\6.7.3\mingw_64 -G Ninja -S C:\Users\alexe\Desktop\MorrsQT -B C:\Users\alexe\Desktop\MorrsQT\cmake-build-debug
+-- Could NOT find WrapVulkanHeaders (missing: Vulkan_INCLUDE_DIR) 
+-- Configuring done (0.4s)
+-- Generating done (0.0s)
+-- Build files have been written to: C:/Users/alexe/Desktop/MorrsQT/cmake-build-debug

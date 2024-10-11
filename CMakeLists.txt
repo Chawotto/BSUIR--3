@@ -5,7 +5,7 @@ set(CMAKE_CXX_STANDARD 23)
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
 set(CMAKE_AUTOUIC ON)
-set(CMAKE_PREFIX_PATH "C:\Qt\6.4.2\mingw_64")
+set(CMAKE_PREFIX_PATH "C:\\Qt\\6.4.2\\mingw_64")
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /Zc:__cplusplus")
 
 find_package(Qt6 COMPONENTS

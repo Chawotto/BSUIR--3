@@ -16,7 +16,7 @@ jobs:
 
     - name: Set up Qt
       run: |
-        choco install -y qt6-base-dev
+        choco install qt6-base-dev
       
     - name: Build with CMake
       run: |

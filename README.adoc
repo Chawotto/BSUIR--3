@@ -1,0 +1,35 @@
+:uri-qg-status: https://sonarcloud.io/project/overview?id=Chawotto_MorrS
+:img-qg-status: https://sonarcloud.io/api/project_badges/measure?project=Chawotto_MorrS&metric=alert_status
+:uri-build-status: https://github.com/Chawotto/MorrS/actions/workflows/build.yml
+:img-build-status: https://github.com/Chawotto/MorrS/actions/workflows/build.yml/badge.svg
+
+image:{img-build-status}[Build Status, link={uri-build-status}]
+image:{img-qg-status}[Quality Gate Status,link={uri-qg-status}]
+
+= MorrS
+
+MorrS - это виртуальный локальный магазин игр. 
+
+== Функции
+
+- MorrS дает возможность войти под именем разработчика, а также геймера. 
+- Разработчик может добавить свою игру, обновлять ее, при необходимости удалять.
+- Геймер, в свою очередь может добавить созданную разработчиком игру в свою библиотеку, удалить ее оттуда.
+- Интерфейс и функционал программы будет совершенствоваться по мере ее написания, все изменения будут отражены в этом Readme.
+- Планируется добавление системы отзывов, распродаж, полное изменение системы входа и полное изменение визуальной части программы.
+
+== Структура проекта 
+
+Проект разделен на следующие файлы:
+
+- `dev_opt.cpp` - код для реализации опций разработчика
+- `dev_opt.h` - заголовочный файл
+- `gam_opt.cpp` - код для реализации опций геймера
+- `gam_opt.cpp.h` - заголовочный файл
+- `user_interfaces.cpp` - код для реализации простейшего (консольного) интерфейса
+- `user_interfaces.h` - заголовочный файл
+- `main.cpp`
+
+== Ссылка на Sonar
+
+- https://sonarcloud.io/project/overview?id=Chawotto_MorrS

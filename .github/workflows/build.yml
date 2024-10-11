@@ -1,34 +1,37 @@
 name: Build
+
 on:
   push:
     branches:
       - main
   pull_request:
     types: [opened, synchronize, reopened]
+
 jobs:
   build:
-    name: Build
-    runs-on: windows-latest
-    env:
-      BUILD_WRAPPER_OUT_DIR: build_wrapper_output_directory # Directory where build-wrapper output will be placed
-      CMAKE_PREFIX_PATH: "C:/Qt/6.*/msvc2019_64/lib/cmake" # Укажите правильный путь к Qt6
+    runs-on: ubuntu-latest
+
     steps:
-      - uses: actions/checkout@v4
-        with:
-          fetch-depth: 0 # Shallow clones should be disabled for a better relevancy of analysis
-      - name: Install Qt6
-        run: |
-          choco install qt6-base-dev
-      - name: Install sonar-scanner and build-wrapper
-        uses: sonarsource/sonarcloud-github-c-cpp@v3
-      - name: Run build-wrapper
-        run: |
-          New-Item -ItemType directory -Path build -Force # Создает папку build, если она не существует
-          cmake -S . -B build -DCMAKE_PREFIX_PATH="${{ env.CMAKE_PREFIX_PATH }}"
-          build-wrapper-win-x86-64 --out-dir ${{ env.BUILD_WRAPPER_OUT_DIR }} cmake --build build/ --config Release
-      - name: Run sonar-scanner
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }} # Укажите имя вашего токена
-        run: |
-          sonar-scanner --define sonar.cfamily.compile-commands="${{ env.BUILD_WRAPPER_OUT_DIR }}/compile_commands.json"
+    - uses: actions/checkout@v2
+
+    - name: Set up Qt
+      uses: jurplel/install-qt-action@v2
+      with:
+        version: '5.15.2'
+        host: ubuntu
+        target: desktop
+        arch: gcc_64
+
+    - name: Build with CMake
+      run: |
+        mkdir build
+        cd build
+        cmake .. -DCMAKE_PREFIX_PATH=$HOME/Qt/5.15.2/gcc_64
+        cmake --build .
+
+    - name: Run SonarCloud Scan
+      env:
+        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+      run: |
+        build-wrapper-linux-x86-64 --out-dir bw-output cmake --build .
+        sonar-scanner

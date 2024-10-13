@@ -68,15 +68,10 @@ public:
     }
 
     void display() const;
-
     void updateVersion(versions newVersion);
-
     [[nodiscard]] string getName() const;
-
     [[nodiscard]] string getGenre() const;
-
     [[nodiscard]] float getWeight() const;
-
     [[nodiscard]] float getCost() const;
 
     [[nodiscard]] string toString() const {

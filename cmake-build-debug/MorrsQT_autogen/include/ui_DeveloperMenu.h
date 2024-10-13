@@ -31,9 +31,9 @@ public:
     QPushButton *createButton;
     QPushButton *findButton;
     QPushButton *readGamesButton;
-    QPushButton *backButton;
     QPushButton *deleteButton;
     QPushButton *updateButton;
+    QPushButton *backButton;
     QStatusBar *statusbar;
     QTextEdit *outputTextArea;
 
@@ -44,20 +44,19 @@ public:
         DeveloperMenu->resize(724, 624);
         centralwidget = new QWidget(DeveloperMenu);
         centralwidget->setObjectName("centralwidget");
-        centralwidget->setGeometry(QRect(0, 0, 600, 400));
+        centralwidget->setGeometry(QRect(60, 0, 600, 400));
         titleLabel = new QLabel(centralwidget);
         titleLabel->setObjectName("titleLabel");
-        titleLabel->setGeometry(QRect(250, 20, 211, 40));
+        titleLabel->setGeometry(QRect(200, 20, 211, 40));
+        titleLabel->setAutoFillBackground(false);
         titleLabel->setAlignment(Qt::AlignmentFlag::AlignCenter);
         gameNameInput = new QLineEdit(centralwidget);
         gameNameInput->setObjectName("gameNameInput");
-        gameNameInput->setGeometry(QRect(110, 80, 500, 30));
-        gameNameInput->setStyleSheet(QString::fromUtf8("  QPushButton {\n"
-"         \n"
-"         \n"
-"          border-radius: 50px;\n"
-"         \n"
-"      }"));
+        gameNameInput->setGeometry(QRect(50, 70, 500, 41));
+        gameNameInput->setStyleSheet(QString::fromUtf8("   QLineEdit {\n"
+"                    border-radius: 10px;\n"
+"                    padding: 10px;\n"
+"                    }"));
         versionComboBox = new QComboBox(centralwidget);
         versionComboBox->addItem(QString());
         versionComboBox->addItem(QString());
@@ -69,22 +68,22 @@ public:
         versionComboBox->setVisible(false);
         createButton = new QPushButton(centralwidget);
         createButton->setObjectName("createButton");
-        createButton->setGeometry(QRect(120, 160, 201, 61));
+        createButton->setGeometry(QRect(70, 130, 201, 61));
         findButton = new QPushButton(centralwidget);
         findButton->setObjectName("findButton");
-        findButton->setGeometry(QRect(390, 160, 201, 61));
+        findButton->setGeometry(QRect(330, 130, 201, 61));
         readGamesButton = new QPushButton(centralwidget);
         readGamesButton->setObjectName("readGamesButton");
-        readGamesButton->setGeometry(QRect(390, 230, 201, 61));
-        backButton = new QPushButton(centralwidget);
-        backButton->setObjectName("backButton");
-        backButton->setGeometry(QRect(120, 230, 201, 61));
+        readGamesButton->setGeometry(QRect(330, 200, 201, 61));
         deleteButton = new QPushButton(centralwidget);
         deleteButton->setObjectName("deleteButton");
-        deleteButton->setGeometry(QRect(120, 310, 201, 61));
+        deleteButton->setGeometry(QRect(140, 310, 201, 61));
         updateButton = new QPushButton(centralwidget);
         updateButton->setObjectName("updateButton");
-        updateButton->setGeometry(QRect(390, 310, 201, 61));
+        updateButton->setGeometry(QRect(360, 310, 201, 61));
+        backButton = new QPushButton(centralwidget);
+        backButton->setObjectName("backButton");
+        backButton->setGeometry(QRect(10, 320, 111, 41));
         statusbar = new QStatusBar(DeveloperMenu);
         statusbar->setObjectName("statusbar");
         statusbar->setGeometry(QRect(0, 0, 3, 21));
@@ -150,18 +149,6 @@ public:
 "      }\n"
 "     ", nullptr));
         readGamesButton->setText(QCoreApplication::translate("DeveloperMenu", "Read Games", nullptr));
-        backButton->setStyleSheet(QCoreApplication::translate("DeveloperMenu", "\n"
-"      QPushButton {\n"
-"          background-color: #F39C12;\n"
-"          color: white;\n"
-"          border-radius: 20px;\n"
-"          padding: 10px;\n"
-"      }\n"
-"      QPushButton:hover {\n"
-"          background-color: #E67E22;\n"
-"      }\n"
-"     ", nullptr));
-        backButton->setText(QCoreApplication::translate("DeveloperMenu", "Back", nullptr));
         deleteButton->setStyleSheet(QCoreApplication::translate("DeveloperMenu", "\n"
 "      QPushButton {\n"
 "          background-color: #E74C3C;\n"
@@ -186,6 +173,18 @@ public:
 "      }\n"
 "     ", nullptr));
         updateButton->setText(QCoreApplication::translate("DeveloperMenu", "Update Game", nullptr));
+        backButton->setStyleSheet(QCoreApplication::translate("DeveloperMenu", "\n"
+"      QPushButton {\n"
+"          background-color: #F39C12;\n"
+"          color: white;\n"
+"          border-radius: 20px;\n"
+"          padding: 10px;\n"
+"      }\n"
+"      QPushButton:hover {\n"
+"          background-color: #E67E22;\n"
+"      }\n"
+"     ", nullptr));
+        backButton->setText(QCoreApplication::translate("DeveloperMenu", "Back", nullptr));
     } // retranslateUi
 
 };

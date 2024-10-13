@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>RegistrationWindow</class>
+ <widget class="QWidget" name="RegistrationWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>730</width>
+    <height>527</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>RegistrationWindow</string>
+  </property>
+  <widget class="QLineEdit" name="nameLineEdit">
+   <property name="geometry">
+    <rect>
+     <x>180</x>
+     <y>40</y>
+     <width>331</width>
+     <height>42</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">
+                    QLineEdit {
+                    border-radius: 10px;
+                    padding: 10px;
+                    }
+                </string>
+   </property>
+   <property name="placeholderText">
+    <string>Enter your name</string>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="ageLineEdit">
+   <property name="geometry">
+    <rect>
+     <x>180</x>
+     <y>90</y>
+     <width>331</width>
+     <height>42</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">
+                    QLineEdit {
+                    border-radius: 10px;
+                    padding: 10px;
+                    }
+                </string>
+   </property>
+   <property name="inputMask">
+    <string/>
+   </property>
+   <property name="placeholderText">
+    <string>Enter your age</string>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="passwordLineEdit">
+   <property name="geometry">
+    <rect>
+     <x>180</x>
+     <y>140</y>
+     <width>331</width>
+     <height>42</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">
+                    QLineEdit {
+                    border-radius: 10px;
+                    padding: 10px;
+                    }
+                </string>
+   </property>
+   <property name="echoMode">
+    <enum>QLineEdit::EchoMode::Password</enum>
+   </property>
+   <property name="placeholderText">
+    <string>Enter your password</string>
+   </property>
+  </widget>
+  <widget class="QComboBox" name="genderComboBox">
+   <property name="geometry">
+    <rect>
+     <x>180</x>
+     <y>190</y>
+     <width>331</width>
+     <height>42</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">
+                    QComboBox {
+                    border-radius: 10px;
+                    padding: 10px;
+                    }
+                </string>
+   </property>
+   <item>
+    <property name="text">
+     <string>Male</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Female</string>
+    </property>
+   </item>
+  </widget>
+  <widget class="QComboBox" name="roleComboBox">
+   <property name="geometry">
+    <rect>
+     <x>180</x>
+     <y>240</y>
+     <width>331</width>
+     <height>42</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">
+                    QComboBox {
+                    border-radius: 10px;
+                    padding: 10px;
+                    }
+                </string>
+   </property>
+   <item>
+    <property name="text">
+     <string>Developer</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Gamer</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Administrator</string>
+    </property>
+   </item>
+  </widget>
+  <widget class="QPushButton" name="saveButton">
+   <property name="geometry">
+    <rect>
+     <x>290</x>
+     <y>300</y>
+     <width>111</width>
+     <height>51</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true"> QPushButton {
+                    background-color: #8E44AD;
+                    color: white;
+                    border-radius: 20px;
+                    padding: 10px;
+                    }
+                    QPushButton:hover {
+                    background-color: #E67E22;
+                    }</string>
+   </property>
+   <property name="text">
+    <string>Save</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="backButton">
+   <property name="geometry">
+    <rect>
+     <x>580</x>
+     <y>460</y>
+     <width>131</width>
+     <height>51</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string>
+                    QPushButton {
+                    background-color: #F39C12;
+                    color: white;
+                    border-radius: 20px;
+                    padding: 10px;
+                    }
+                    QPushButton:hover {
+                    background-color: #E67E22;
+                    }
+                </string>
+   </property>
+   <property name="text">
+    <string>Back</string>
+   </property>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

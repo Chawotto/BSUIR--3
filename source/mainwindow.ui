@@ -22,7 +22,7 @@
      <height>300</height>
     </rect>
    </property>
-   <widget class="QPushButton" name="developerButton">
+   <widget class="QPushButton" name="signInButton">
     <property name="geometry">
      <rect>
       <x>110</x>
@@ -48,10 +48,10 @@
      </string>
     </property>
     <property name="text">
-     <string>Developer</string>
+     <string>Sign In</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="gamerButton">
+   <widget class="QPushButton" name="signUpButton">
     <property name="geometry">
      <rect>
       <x>110</x>
@@ -74,7 +74,7 @@
      </string>
     </property>
     <property name="text">
-     <string>Gamer</string>
+     <string>Sign Up</string>
     </property>
    </widget>
    <widget class="QPushButton" name="exitButton">
@@ -138,9 +138,7 @@
    </property>
    <property name="styleSheet">
     <string notr="true">  QPushButton {
-          
           border-radius: 20px;
-         
       }</string>
    </property>
    <property name="pixmap">

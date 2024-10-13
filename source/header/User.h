@@ -1,13 +1,8 @@
-//
-// Created by alexe on 08.10.2024.
-//
-
 #ifndef USER_H
 #define USER_H
 
-#endif //USER_H
-
 #include <string>
+#include <utility>
 
 using namespace std;
 
@@ -23,21 +18,40 @@ private:
     int age;
     string gender;
     userRole role;
-    friend userRole;
+    string password;
 
-    string roleToString() const {
+    [[nodiscard]] string roleToString() const {
         switch (role) {
             using enum userRole;
-            case Developer:
+            case userRole::Developer:
                 return "Developer";
-            case Gamer:
+            case userRole::Gamer:
                 return "Gamer";
-            case Administrator:
+            case userRole::Administrator:
                 return "Administrator";
             default:
                 return "Unknown";
         }
     }
 
+public:
 
+    User() : age(0), role(userRole::Gamer) {}
+
+    User(string  userName, int userAge, string  userGender, userRole userRole)
+        : name(std::move(userName)), age(userAge), gender(std::move(userGender)), role(userRole) {}
+
+    void setName(const string_view& userName);
+    void setAge(int userAge);
+    void setGender(const string_view& userGender);
+    void setRole(userRole userRole);
+    void setPassword(const string_view& userPassword);
+    [[nodiscard]] string getName() const;
+    [[nodiscard]] int getAge() const;
+    [[nodiscard]] string getGender() const;
+    [[nodiscard]] userRole getRole() const;
+    [[nodiscard]] string getPassword() const;
+    [[nodiscard]] string roleAsString() const;
 };
+
+#endif // USER_H

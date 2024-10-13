@@ -155,8 +155,11 @@ C:/Users/alexe/Desktop/MorrsQT/cmake-build-debug/MorrsQT_autogen/NC33UM25LT/moc_
   C:/Qt/6.7.3/mingw_64/include/QtWidgets/qtwidgetsexports.h \
   C:/Qt/6.7.3/mingw_64/include/QtWidgets/qtwidgetsglobal.h \
   C:/Qt/6.7.3/mingw_64/include/QtWidgets/qwidget.h \
+  C:/Users/alexe/Desktop/MorrsQT/source/header/User.h \
   C:/Users/alexe/Desktop/MorrsQT/source/header/developermenu.h \
+  C:/Users/alexe/Desktop/MorrsQT/source/header/enterwindow.h \
   C:/Users/alexe/Desktop/MorrsQT/source/header/gamermenu.h \
+  C:/Users/alexe/Desktop/MorrsQT/source/header/registrationwindow.h \
   D:/Programs/CLion\ 2024.2.2/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/algorithm \
   D:/Programs/CLion\ 2024.2.2/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/array \
   D:/Programs/CLion\ 2024.2.2/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/atomic \

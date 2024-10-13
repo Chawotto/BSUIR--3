@@ -4,6 +4,7 @@
 #include <QWidget>
 
 class MainWindow;
+class EnterWindow;
 
 namespace Ui {
     class DeveloperMenu;
@@ -13,7 +14,7 @@ class DeveloperMenu : public QWidget {
     Q_OBJECT
 
 public:
-    explicit DeveloperMenu(MainWindow *mainWin, QWidget *parent = nullptr);
+    explicit DeveloperMenu(MainWindow *mainWin,EnterWindow *enterWin, const QString &username, QWidget *parent = nullptr);
     ~DeveloperMenu() override;
 
     private slots:
@@ -27,6 +28,8 @@ public:
 private:
     Ui::DeveloperMenu *ui;
     MainWindow *mainWindow;
+    EnterWindow *enterWindow;
+    QString currentUser;
 };
 
 #endif // DEVELOPERMENU_H

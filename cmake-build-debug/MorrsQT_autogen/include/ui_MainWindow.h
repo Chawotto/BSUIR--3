@@ -23,8 +23,8 @@ class Ui_MainWindow
 {
 public:
     QWidget *centralwidget;
-    QPushButton *developerButton;
-    QPushButton *gamerButton;
+    QPushButton *signInButton;
+    QPushButton *signUpButton;
     QPushButton *exitButton;
     QTextEdit *outputTextArea;
     QStatusBar *statusbar;
@@ -38,11 +38,11 @@ public:
         centralwidget = new QWidget(MainWindow);
         centralwidget->setObjectName("centralwidget");
         centralwidget->setGeometry(QRect(240, 220, 400, 300));
-        developerButton = new QPushButton(centralwidget);
-        developerButton->setObjectName("developerButton");
-        developerButton->setGeometry(QRect(110, 20, 151, 61));
-        developerButton->setTabletTracking(false);
-        developerButton->setStyleSheet(QString::fromUtf8("\n"
+        signInButton = new QPushButton(centralwidget);
+        signInButton->setObjectName("signInButton");
+        signInButton->setGeometry(QRect(110, 20, 151, 61));
+        signInButton->setTabletTracking(false);
+        signInButton->setStyleSheet(QString::fromUtf8("\n"
 "      QPushButton {\n"
 "          background-color: #3498DB;\n"
 "          color: white;\n"
@@ -53,9 +53,9 @@ public:
 "          background-color: #2980B9;\n"
 "      }\n"
 "     "));
-        gamerButton = new QPushButton(centralwidget);
-        gamerButton->setObjectName("gamerButton");
-        gamerButton->setGeometry(QRect(110, 100, 151, 61));
+        signUpButton = new QPushButton(centralwidget);
+        signUpButton->setObjectName("signUpButton");
+        signUpButton->setGeometry(QRect(110, 100, 151, 61));
         exitButton = new QPushButton(centralwidget);
         exitButton->setObjectName("exitButton");
         exitButton->setGeometry(QRect(110, 180, 151, 61));
@@ -70,9 +70,7 @@ public:
         logoLabel->setObjectName("logoLabel");
         logoLabel->setGeometry(QRect(340, 50, 161, 161));
         logoLabel->setStyleSheet(QString::fromUtf8("  QPushButton {\n"
-"          \n"
 "          border-radius: 20px;\n"
-"         \n"
 "      }"));
         logoLabel->setPixmap(QPixmap(QString::fromUtf8("Images/logo.png")));
         logoLabel->setScaledContents(true);
@@ -85,8 +83,8 @@ public:
     void retranslateUi(QWidget *MainWindow)
     {
         MainWindow->setWindowTitle(QCoreApplication::translate("MainWindow", "MorrS", nullptr));
-        developerButton->setText(QCoreApplication::translate("MainWindow", "Developer", nullptr));
-        gamerButton->setStyleSheet(QCoreApplication::translate("MainWindow", "\n"
+        signInButton->setText(QCoreApplication::translate("MainWindow", "Sign In", nullptr));
+        signUpButton->setStyleSheet(QCoreApplication::translate("MainWindow", "\n"
 "      QPushButton {\n"
 "          background-color: #E74C3C;\n"
 "          color: white;\n"
@@ -97,7 +95,7 @@ public:
 "          background-color: #C0392B;\n"
 "      }\n"
 "     ", nullptr));
-        gamerButton->setText(QCoreApplication::translate("MainWindow", "Gamer", nullptr));
+        signUpButton->setText(QCoreApplication::translate("MainWindow", "Sign Up", nullptr));
         exitButton->setStyleSheet(QCoreApplication::translate("MainWindow", "\n"
 "      QPushButton {\n"
 "          background-color: #1ABC9C;\n"

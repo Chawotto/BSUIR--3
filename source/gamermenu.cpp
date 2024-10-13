@@ -8,8 +8,8 @@
 #include <fstream>
 #include <vector>
 
-GamerMenu::GamerMenu(MainWindow *mainWin, QWidget *parent) :
-    QWidget(parent), ui(new Ui::GamerMenu), mainWindow(mainWin) {
+GamerMenu::GamerMenu(MainWindow *mainWin, EnterWindow *enterWin, const QString &username, QWidget *parent) :
+    QWidget(parent), ui(new Ui::GamerMenu), mainWindow(mainWin), enterWindow(enterWin), currentUser(username) {
     ui->setupUi(this);
     ui->deleteButton->setVisible(false);
 }
@@ -29,7 +29,9 @@ QString formatGameGamer(const Game& game) {
 
 void GamerMenu::on_readLibraryButton_clicked() {
     QString gamesList;
-    std::ifstream in("library.txt");
+    QString userFileName = currentUser + ".txt";
+    std::ifstream in(userFileName.toStdString());
+
     if (!in.is_open()) {
         QMessageBox::critical(this, "Error", "Error opening file for reading.");
         return;
@@ -56,7 +58,8 @@ void GamerMenu::on_findGameButton_clicked() {
         return;
     }
 
-    std::ifstream in("library.txt");
+    QString userFileName = currentUser + ".txt";
+    std::ifstream in(userFileName.toStdString());
     std::vector<Game> games;
     bool found = false;
 
@@ -99,7 +102,8 @@ void GamerMenu::on_deleteButton_clicked() {
         return;
     }
 
-    deleteGameFromGamerFile(name.toStdString(), "library.txt");
+    QString userFileName = currentUser + ".txt";
+    deleteGameFromGamerFile(name.toStdString(), userFileName.toStdString());
     QMessageBox::information(this, "Success", "Game deleted successfully.");
     ui->deleteButton->setVisible(false);
     ui->outputTextArea->clear();
@@ -107,6 +111,8 @@ void GamerMenu::on_deleteButton_clicked() {
 
 void GamerMenu::on_buyButton_clicked() {
     QString gameName = ui->gameNameInput->text().trimmed();
+
+    QString userFileName = currentUser + ".txt";
 
     if (gameName.isEmpty()) {
         QString gamesList;
@@ -131,7 +137,7 @@ void GamerMenu::on_buyButton_clicked() {
         return;
     }
 
-    if (addGameToLibrary(gameName.toStdString())) {
+    if (addGameToLibrary(gameName.toStdString(), userFileName.toStdString())) {
         QMessageBox::information(this, "Success", "Game added to library.");
     } else {
         QString gamesList;
@@ -155,6 +161,10 @@ void GamerMenu::on_buyButton_clicked() {
 }
 
 void GamerMenu::on_backButton_clicked() {
+    ui->outputTextArea->clear();
+    ui->gameNameInput->clear();
+    ui->deleteButton->setVisible(false);
+
     this->close();
     if (mainWindow) {
         mainWindow->show();

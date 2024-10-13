@@ -231,6 +231,12 @@
 			null
 		],
 		[
+			"C:/Users/alexe/Desktop/MorrsQT/source/header/enterwindow.h",
+			"MU",
+			"NC33UM25LT/moc_enterwindow.cpp",
+			null
+		],
+		[
 			"C:/Users/alexe/Desktop/MorrsQT/source/header/gamermenu.h",
 			"MU",
 			"NC33UM25LT/moc_gamermenu.cpp",
@@ -240,6 +246,12 @@
 			"C:/Users/alexe/Desktop/MorrsQT/source/header/mainwindow.h",
 			"MU",
 			"NC33UM25LT/moc_mainwindow.cpp",
+			null
+		],
+		[
+			"C:/Users/alexe/Desktop/MorrsQT/source/header/registrationwindow.h",
+			"MU",
+			"NC33UM25LT/moc_registrationwindow.cpp",
 			null
 		]
 	],
@@ -318,10 +330,16 @@
 		[ "C:/Users/alexe/Desktop/MorrsQT/source/User.cpp", "MU", null ],
 		[ "C:/Users/alexe/Desktop/MorrsQT/source/devOpt.cpp", "MU", null ],
 		[ "C:/Users/alexe/Desktop/MorrsQT/source/developermenu.cpp", "MU", null ],
+		[ "C:/Users/alexe/Desktop/MorrsQT/source/enterwindow.cpp", "MU", null ],
 		[ "C:/Users/alexe/Desktop/MorrsQT/source/gamOpt.cpp", "MU", null ],
 		[ "C:/Users/alexe/Desktop/MorrsQT/source/gamermenu.cpp", "MU", null ],
 		[ "C:/Users/alexe/Desktop/MorrsQT/source/main.cpp", "MU", null ],
-		[ "C:/Users/alexe/Desktop/MorrsQT/source/mainwindow.cpp", "MU", null ]
+		[ "C:/Users/alexe/Desktop/MorrsQT/source/mainwindow.cpp", "MU", null ],
+		[
+			"C:/Users/alexe/Desktop/MorrsQT/source/registrationwindow.cpp",
+			"MU",
+			null
+		]
 	],
 	"UIC_OPTIONS" : [],
 	"UIC_SEARCH_PATHS" : [],

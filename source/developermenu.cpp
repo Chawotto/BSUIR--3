@@ -5,8 +5,8 @@
 #include "header/Game.h"
 #include "header/mainwindow.h"
 
-DeveloperMenu::DeveloperMenu(MainWindow *mainWin, QWidget *parent) :
-    QWidget(parent), ui(new Ui::DeveloperMenu), mainWindow(mainWin) {
+DeveloperMenu::DeveloperMenu(MainWindow *mainWin, EnterWindow *enterWin, const QString &username, QWidget *parent) :
+    QWidget(parent), ui(new Ui::DeveloperMenu), mainWindow(mainWin), enterWindow(enterWin), currentUser(username) {
     ui->setupUi(this);
     ui->deleteButton->setVisible(false);
     ui->updateButton->setVisible(false);
@@ -25,6 +25,32 @@ QString formatGame(const Game& game) {
             .arg(QString::number(game.getCost()));
 }
 
+std::vector<QString> getGamerUsernames() {
+    std::vector<QString> gamers;
+    std::ifstream in("users.txt");
+    if (in.is_open()) {
+        std::string line;
+        while (std::getline(in, line)) {
+            std::istringstream iss(line);
+            QString username;
+            QString role;
+            std::string temp;
+
+            std::getline(iss, temp, ',');
+            username = QString::fromStdString(temp);
+            for (int i = 0; i < 4; ++i) std::getline(iss, temp, ',');
+            std::getline(iss, temp, ',');
+            role = QString::fromStdString(temp);
+
+            if (role == "Gamer") {
+                gamers.push_back(username);
+            }
+        }
+        in.close();
+    }
+    return gamers;
+}
+
 void DeveloperMenu::on_createButton_clicked() {
     QString name = QInputDialog::getText(this, "Create Game", "Enter game name:");
     QString genre = QInputDialog::getText(this, "Create Game", "Enter game genre:");
@@ -38,19 +64,26 @@ void DeveloperMenu::on_createButton_clicked() {
 
     Game game(name.toStdString(), genre.toStdString(), static_cast<versions>(versionInt), static_cast<float>(weight), static_cast<float>(cost));
 
-    std::ofstream out("games.txt", std::ios::app);
-    if (out.is_open()) {
-        game.saveToFile(out);
-        out.close();
-        QMessageBox::information(this, "Success", "Game information saved to file.");
+    QString userFileName = currentUser + ".txt";
+    std::ofstream outGames("games.txt", std::ios::app);
+    std::ofstream outUser(userFileName.toStdString(), std::ios::app);
+
+    if (outGames.is_open() && outUser.is_open()) {
+        game.saveToFile(outGames);
+        game.saveToFile(outUser);
+        QMessageBox::information(this, "Success", "Game information saved to both files.");
     } else {
         QMessageBox::critical(this, "Error", "Error opening file for writing.");
     }
+
+    outGames.close();
+    outUser.close();
 }
 
 void DeveloperMenu::on_readGamesButton_clicked() {
     QString gamesList;
-    std::ifstream in("games.txt");
+    QString userFileName = currentUser + ".txt";
+    std::ifstream in(userFileName.toStdString());
     if (!in.is_open()) {
         QMessageBox::critical(this, "Error", "Error opening file for reading.");
         return;
@@ -77,7 +110,8 @@ void DeveloperMenu::on_findButton_clicked() {
         return;
     }
 
-    std::ifstream in("games.txt");
+    QString userFileName = currentUser + ".txt";
+    std::ifstream in(userFileName.toStdString());
     std::vector<Game> games;
     bool found = false;
 
@@ -100,7 +134,7 @@ void DeveloperMenu::on_findButton_clicked() {
             found = true;
             foundGameDetails = formatGame(game);
             ui->outputTextArea->setHtml(foundGameDetails);
-            ui->versionComboBox->setVisible(true); // Показать QComboBox
+            ui->versionComboBox->setVisible(true);
             ui->deleteButton->setVisible(true);
             ui->updateButton->setVisible(true);
             break;
@@ -124,7 +158,16 @@ void DeveloperMenu::on_deleteButton_clicked() {
         return;
     }
 
+    QString userFileName = currentUser + ".txt";
+    deleteGameFromFile(name.toStdString(), userFileName.toStdString());
     deleteGameFromFile(name.toStdString(), "games.txt");
+
+    std::vector<QString> gamers = getGamerUsernames();
+    for (const auto& gamer : gamers) {
+        QString gamerFileName = gamer + ".txt";
+        deleteGameFromFile(name.toStdString(), gamerFileName.toStdString());
+    }
+
     QMessageBox::information(this, "Success", "Game deleted successfully.");
     ui->deleteButton->setVisible(false);
     ui->updateButton->setVisible(false);
@@ -139,28 +182,75 @@ void DeveloperMenu::on_updateButton_clicked() {
         return;
     }
 
-    std::ifstream in("games.txt");
-    std::vector<Game> games;
+    QString userFileName = currentUser + ".txt";
+    std::ifstream in(userFileName.toStdString());
+    std::vector<Game> userGames;
 
     if (in.is_open()) {
         while (in.good()) {
             Game game = Game::readFromFile(in);
             if (in.good()) {
-                games.push_back(game);
+                userGames.push_back(game);
             }
         }
         in.close();
     }
 
-    for (auto &game : games) {
+    bool gameUpdated = false;
+    for (auto &game : userGames) {
         if (game.getName() == name.toStdString()) {
-            // Получаем выбранную версию из QComboBox
             int selectedIndex = ui->versionComboBox->currentIndex();
-            game.updateVersion(static_cast<versions>(selectedIndex)); // Обновление версии
-            updateGameInFile(games, "games.txt");
-            QMessageBox::information(this, "Success", "Game updated successfully.");
+            game.updateVersion(static_cast<versions>(selectedIndex));
+            gameUpdated = true;
             break;
         }
+    }
+
+    if (gameUpdated) {
+        std::ofstream outUser(userFileName.toStdString());
+        if (outUser.is_open()) {
+            for (const auto &game : userGames) {
+                game.saveToFile(outUser);
+            }
+            outUser.close();
+        } else {
+            QMessageBox::critical(this, "Error", "Error opening user file for writing.");
+        }
+
+        std::vector<QString> gamers = getGamerUsernames();
+        for (const auto& gamer : gamers) {
+            QString gamerFileName = gamer + ".txt";
+            std::ifstream inGamer(gamerFileName.toStdString());
+            std::vector<Game> gamerGames;
+
+            if (inGamer.is_open()) {
+                while (inGamer.good()) {
+                    Game game = Game::readFromFile(inGamer);
+                    if (inGamer.good()) {
+                        gamerGames.push_back(game);
+                    }
+                }
+                inGamer.close();
+            }
+
+            for (auto &game : gamerGames) {
+                if (game.getName() == name.toStdString()) {
+                    int selectedIndex = ui->versionComboBox->currentIndex();
+                    game.updateVersion(static_cast<versions>(selectedIndex));
+                    break;
+                }
+            }
+
+            std::ofstream outGamer(gamerFileName.toStdString());
+            if (outGamer.is_open()) {
+                for (const auto &game : gamerGames) {
+                    game.saveToFile(outGamer);
+                }
+                outGamer.close();
+            }
+        }
+
+        QMessageBox::information(this, "Success", "Game updated successfully.");
     }
 
     ui->deleteButton->setVisible(false);
@@ -168,7 +258,14 @@ void DeveloperMenu::on_updateButton_clicked() {
     ui->outputTextArea->clear();
 }
 
+
 void DeveloperMenu::on_backButton_clicked() {
+    ui->outputTextArea->clear();
+    ui->gameNameInput->clear();
+    ui->versionComboBox->setVisible(false);
+    ui->deleteButton->setVisible(false);
+    ui->updateButton->setVisible(false);
+
     this->close();
     if (mainWindow) {
         mainWindow->show();

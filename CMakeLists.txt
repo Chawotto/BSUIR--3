@@ -1,12 +1,11 @@
 cmake_minimum_required(VERSION 3.29)
 project(MorrsQT)
 
-set(CMAKE_CXX_STANDARD 23)
+set(CMAKE_CXX_STANDARD 26)
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
 set(CMAKE_AUTOUIC ON)
 set(CMAKE_PREFIX_PATH "C:\\Qt\\6.7.3\\mingw_64")
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /Zc:__cplusplus")
 
 find_package(Qt6 COMPONENTS
         Core
@@ -29,6 +28,12 @@ add_executable(MorrsQT
         source/mainwindow.cpp
         source/header/mainwindow.h
         source/mainwindow.ui
+        source/enterwindow.cpp
+        source/header/enterwindow.h
+        source/enterwindow.ui
+        source/registrationwindow.cpp
+        source/header/registrationwindow.h
+        source/registrationwindow.ui
 )
 
 

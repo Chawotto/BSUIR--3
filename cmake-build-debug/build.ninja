@@ -121,6 +121,22 @@ build CMakeFiles/MorrsQT.dir/source/mainwindow.cpp.obj: CXX_COMPILER__MorrsQT_un
   OBJECT_DIR = CMakeFiles\MorrsQT.dir
   OBJECT_FILE_DIR = CMakeFiles\MorrsQT.dir\source
 
+build CMakeFiles/MorrsQT.dir/source/enterwindow.cpp.obj: CXX_COMPILER__MorrsQT_unscanned_Debug C$:/Users/alexe/Desktop/MorrsQT/source/enterwindow.cpp || cmake_object_order_depends_target_MorrsQT
+  DEFINES = -DMINGW_HAS_SECURE_API=1 -DQT_CORE_LIB -DQT_GUI_LIB -DQT_WIDGETS_LIB -DUNICODE -DWIN32 -DWIN64 -D_ENABLE_EXTENDED_ALIGNED_STORAGE -D_UNICODE -D_WIN64
+  DEP_FILE = CMakeFiles\MorrsQT.dir\source\enterwindow.cpp.obj.d
+  FLAGS = -g -std=gnu++23 -fdiagnostics-color=always
+  INCLUDES = -isystem C:/Users/alexe/Desktop/MorrsQT/cmake-build-debug/MorrsQT_autogen/include -isystem C:/Qt/6.7.3/mingw_64/include/QtCore -isystem C:/Qt/6.7.3/mingw_64/include -isystem C:/Qt/6.7.3/mingw_64/mkspecs/win32-g++ -isystem C:/Qt/6.7.3/mingw_64/include/QtGui -isystem C:/Qt/6.7.3/mingw_64/include/QtWidgets
+  OBJECT_DIR = CMakeFiles\MorrsQT.dir
+  OBJECT_FILE_DIR = CMakeFiles\MorrsQT.dir\source
+
+build CMakeFiles/MorrsQT.dir/source/registrationwindow.cpp.obj: CXX_COMPILER__MorrsQT_unscanned_Debug C$:/Users/alexe/Desktop/MorrsQT/source/registrationwindow.cpp || cmake_object_order_depends_target_MorrsQT
+  DEFINES = -DMINGW_HAS_SECURE_API=1 -DQT_CORE_LIB -DQT_GUI_LIB -DQT_WIDGETS_LIB -DUNICODE -DWIN32 -DWIN64 -D_ENABLE_EXTENDED_ALIGNED_STORAGE -D_UNICODE -D_WIN64
+  DEP_FILE = CMakeFiles\MorrsQT.dir\source\registrationwindow.cpp.obj.d
+  FLAGS = -g -std=gnu++23 -fdiagnostics-color=always
+  INCLUDES = -isystem C:/Users/alexe/Desktop/MorrsQT/cmake-build-debug/MorrsQT_autogen/include -isystem C:/Qt/6.7.3/mingw_64/include/QtCore -isystem C:/Qt/6.7.3/mingw_64/include -isystem C:/Qt/6.7.3/mingw_64/mkspecs/win32-g++ -isystem C:/Qt/6.7.3/mingw_64/include/QtGui -isystem C:/Qt/6.7.3/mingw_64/include/QtWidgets
+  OBJECT_DIR = CMakeFiles\MorrsQT.dir
+  OBJECT_FILE_DIR = CMakeFiles\MorrsQT.dir\source
+
 
 # =============================================================================
 # Link build statements for EXECUTABLE target MorrsQT
@@ -129,7 +145,7 @@ build CMakeFiles/MorrsQT.dir/source/mainwindow.cpp.obj: CXX_COMPILER__MorrsQT_un
 #############################################
 # Link the executable MorrsQT.exe
 
-build MorrsQT.exe: CXX_EXECUTABLE_LINKER__MorrsQT_Debug CMakeFiles/MorrsQT.dir/MorrsQT_autogen/mocs_compilation.cpp.obj CMakeFiles/MorrsQT.dir/source/main.cpp.obj CMakeFiles/MorrsQT.dir/source/User.cpp.obj CMakeFiles/MorrsQT.dir/source/gamOpt.cpp.obj CMakeFiles/MorrsQT.dir/source/Game.cpp.obj CMakeFiles/MorrsQT.dir/source/devOpt.cpp.obj CMakeFiles/MorrsQT.dir/source/developermenu.cpp.obj CMakeFiles/MorrsQT.dir/source/gamermenu.cpp.obj CMakeFiles/MorrsQT.dir/source/mainwindow.cpp.obj | C$:/Qt/6.7.3/mingw_64/lib/libQt6Widgets.a C$:/Qt/6.7.3/mingw_64/lib/libQt6Gui.a C$:/Qt/6.7.3/mingw_64/lib/libQt6Core.a || MorrsQT_autogen MorrsQT_autogen_timestamp_deps
+build MorrsQT.exe: CXX_EXECUTABLE_LINKER__MorrsQT_Debug CMakeFiles/MorrsQT.dir/MorrsQT_autogen/mocs_compilation.cpp.obj CMakeFiles/MorrsQT.dir/source/main.cpp.obj CMakeFiles/MorrsQT.dir/source/User.cpp.obj CMakeFiles/MorrsQT.dir/source/gamOpt.cpp.obj CMakeFiles/MorrsQT.dir/source/Game.cpp.obj CMakeFiles/MorrsQT.dir/source/devOpt.cpp.obj CMakeFiles/MorrsQT.dir/source/developermenu.cpp.obj CMakeFiles/MorrsQT.dir/source/gamermenu.cpp.obj CMakeFiles/MorrsQT.dir/source/mainwindow.cpp.obj CMakeFiles/MorrsQT.dir/source/enterwindow.cpp.obj CMakeFiles/MorrsQT.dir/source/registrationwindow.cpp.obj | C$:/Qt/6.7.3/mingw_64/lib/libQt6Widgets.a C$:/Qt/6.7.3/mingw_64/lib/libQt6Gui.a C$:/Qt/6.7.3/mingw_64/lib/libQt6Core.a || MorrsQT_autogen MorrsQT_autogen_timestamp_deps
   FLAGS = -g
   LINK_LIBRARIES = C:/Qt/6.7.3/mingw_64/lib/libQt6Widgets.a  C:/Qt/6.7.3/mingw_64/lib/libQt6Gui.a  C:/Qt/6.7.3/mingw_64/lib/libQt6Core.a  -lmpr  -luserenv  -ld3d11  -ldxgi  -ldxguid  -ld3d12  -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
   OBJECT_DIR = CMakeFiles\MorrsQT.dir
@@ -172,7 +188,7 @@ build MorrsQT_autogen_timestamp_deps: phony
 #############################################
 # Utility command for MorrsQT_autogen
 
-build MorrsQT_autogen: phony CMakeFiles/MorrsQT_autogen MorrsQT_autogen/include/source/ui_developermenu.h MorrsQT_autogen/include/source/ui_gamermenu.h MorrsQT_autogen/include/source/ui_mainwindow.h MorrsQT_autogen/timestamp MorrsQT_autogen/mocs_compilation.cpp MorrsQT_autogen_timestamp_deps
+build MorrsQT_autogen: phony CMakeFiles/MorrsQT_autogen MorrsQT_autogen/include/source/ui_developermenu.h MorrsQT_autogen/include/source/ui_gamermenu.h MorrsQT_autogen/include/source/ui_mainwindow.h MorrsQT_autogen/include/source/ui_enterwindow.h MorrsQT_autogen/include/source/ui_registrationwindow.h MorrsQT_autogen/timestamp MorrsQT_autogen/mocs_compilation.cpp MorrsQT_autogen_timestamp_deps
 
 
 #############################################
@@ -189,7 +205,7 @@ build MorrsQT_autogen/timestamp MorrsQT_autogen/mocs_compilation.cpp | ${cmake_n
 #############################################
 # Phony custom command for CMakeFiles\MorrsQT_autogen
 
-build CMakeFiles/MorrsQT_autogen MorrsQT_autogen/include/source/ui_developermenu.h MorrsQT_autogen/include/source/ui_gamermenu.h MorrsQT_autogen/include/source/ui_mainwindow.h | ${cmake_ninja_workdir}CMakeFiles/MorrsQT_autogen ${cmake_ninja_workdir}MorrsQT_autogen/include/source/ui_developermenu.h ${cmake_ninja_workdir}MorrsQT_autogen/include/source/ui_gamermenu.h ${cmake_ninja_workdir}MorrsQT_autogen/include/source/ui_mainwindow.h: phony MorrsQT_autogen/timestamp || MorrsQT_autogen_timestamp_deps
+build CMakeFiles/MorrsQT_autogen MorrsQT_autogen/include/source/ui_developermenu.h MorrsQT_autogen/include/source/ui_gamermenu.h MorrsQT_autogen/include/source/ui_mainwindow.h MorrsQT_autogen/include/source/ui_enterwindow.h MorrsQT_autogen/include/source/ui_registrationwindow.h | ${cmake_ninja_workdir}CMakeFiles/MorrsQT_autogen ${cmake_ninja_workdir}MorrsQT_autogen/include/source/ui_developermenu.h ${cmake_ninja_workdir}MorrsQT_autogen/include/source/ui_gamermenu.h ${cmake_ninja_workdir}MorrsQT_autogen/include/source/ui_mainwindow.h ${cmake_ninja_workdir}MorrsQT_autogen/include/source/ui_enterwindow.h ${cmake_ninja_workdir}MorrsQT_autogen/include/source/ui_registrationwindow.h: phony MorrsQT_autogen/timestamp || MorrsQT_autogen_timestamp_deps
 
 # =============================================================================
 # Target aliases.

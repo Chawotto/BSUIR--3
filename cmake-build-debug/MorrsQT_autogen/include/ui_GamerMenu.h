@@ -49,11 +49,11 @@ public:
         titleLabel->setAlignment(Qt::AlignmentFlag::AlignCenter);
         gameNameInput = new QLineEdit(centralwidget);
         gameNameInput->setObjectName("gameNameInput");
-        gameNameInput->setGeometry(QRect(70, 60, 500, 30));
-        gameNameInput->setStyleSheet(QString::fromUtf8("  QPushButton {\n"
-"          border-radius: 50px;\n"
-"         \n"
-"      }"));
+        gameNameInput->setGeometry(QRect(70, 49, 500, 41));
+        gameNameInput->setStyleSheet(QString::fromUtf8(" QLineEdit {\n"
+"                    border-radius: 10px;\n"
+"                    padding: 10px;\n"
+"                    }"));
         buyButton = new QPushButton(centralwidget);
         buyButton->setObjectName("buyButton");
         buyButton->setGeometry(QRect(70, 100, 201, 61));
@@ -62,10 +62,10 @@ public:
         findGameButton->setGeometry(QRect(320, 170, 201, 61));
         backButton = new QPushButton(centralwidget);
         backButton->setObjectName("backButton");
-        backButton->setGeometry(QRect(70, 170, 201, 61));
+        backButton->setGeometry(QRect(70, 240, 201, 61));
         deleteButton = new QPushButton(centralwidget);
         deleteButton->setObjectName("deleteButton");
-        deleteButton->setGeometry(QRect(200, 250, 201, 61));
+        deleteButton->setGeometry(QRect(320, 240, 201, 61));
         readLibraryButton = new QPushButton(centralwidget);
         readLibraryButton->setObjectName("readLibraryButton");
         readLibraryButton->setGeometry(QRect(320, 100, 201, 61));

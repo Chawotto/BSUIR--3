@@ -11,8 +11,8 @@
 #include "Game.h"
 #include <vector>
 
-void deleteGameFromGamerFile(const string_view& name, const string& filename);
+void deleteGameFromGamerFile(const std::string_view& name, const std::string& filename);
 
-bool addGameToLibrary(const string_view& game_name, const string& userFileName);
+bool addGameToLibrary(const std::string_view& game_name, const std::string& userFileName);
 
-void updateGameInGamerFile(const vector<Game>& games, const string& filename);
+void updateGameInGamerFile(const std::vector<Game>& games, const std::string& filename);

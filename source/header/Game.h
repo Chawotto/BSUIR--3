@@ -5,8 +5,6 @@
 #include <utility>
 #include <vector>
 
-using namespace std;
-
 enum class versions {
     Pre_Alpha,
     Alfa,
@@ -17,24 +15,24 @@ enum class versions {
 
 class Game {
 private:
-    string name;
-    string genre;
+    std::string name;
+    std::string genre;
     versions version;
     float weight;
     float cost;
 
 public:
-    Game(const string& n, const string& g, versions v, float w, float c)
+    Game(const std::string& n, const std::string& g, versions v, float w, float c)
             : name(n), genre(g), version(v), weight(w), cost(c) {}
 
-    void saveToFile(ofstream& out) const {
+    void saveToFile(std::ofstream& out) const {
         out << name << '\n' << genre << '\n' << std::to_underlying(version) << '\n'
             << weight << '\n' << cost << '\n';
     }
 
-    friend void updateGameInFile(const vector<Game>& games, const string& filename);
+    friend void updateGameInFile(const std::vector<Game>& games, const std::string& filename);
 
-    [[nodiscard]] string versionToString() const {
+    [[nodiscard]] std::string versionToString() const {
         switch (version) {
             using enum versions;
             case Pre_Alpha:
@@ -52,9 +50,9 @@ public:
         }
     }
 
-    static Game readFromFile(ifstream& in) {
-        string n;
-        string g;
+    static Game readFromFile(std::ifstream& in) {
+        std::string n;
+        std::string g;
         int v;
         float w;
         float c;
@@ -69,18 +67,18 @@ public:
 
     void display() const;
     void updateVersion(versions newVersion);
-    [[nodiscard]] string getName() const;
-    [[nodiscard]] string getGenre() const;
+    [[nodiscard]] std::string getName() const;
+    [[nodiscard]] std::string getGenre() const;
     [[nodiscard]] float getWeight() const;
     [[nodiscard]] float getCost() const;
 
-    [[nodiscard]] string toString() const {
+    [[nodiscard]] std::string toString() const {
         return "Name: " + name + ", Genre: " + genre +
                ", Version: " + versionToString() +
-               ", Weight: " + to_string(weight) + " Gb, Cost: $" + to_string(cost);
+               ", Weight: " + std::to_string(weight) + " Gb, Cost: $" + std::to_string(cost);
     }
 
-    friend ostream& operator<<(ostream& os, const Game& game) {
+    friend std::ostream& operator<<(std::ostream& os, const Game& game) {
         os << game.toString();
         return os;
     }

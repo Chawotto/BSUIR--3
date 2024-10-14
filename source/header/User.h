@@ -4,8 +4,6 @@
 #include <string>
 #include <utility>
 
-using namespace std;
-
 enum class userRole {
     Developer,
     Gamer,
@@ -14,13 +12,13 @@ enum class userRole {
 
 class User {
 private:
-    string name;
+    std::string name;
     int age;
-    string gender;
+    std::string gender;
     userRole role;
-    string password;
+    std::string password;
 
-    [[nodiscard]] string roleToString() const {
+    [[nodiscard]] std::string roleToString() const {
         switch (role) {
             using enum userRole;
             case userRole::Developer:
@@ -38,20 +36,20 @@ public:
 
     User() : age(0), role(userRole::Gamer) {}
 
-    User(string  userName, int userAge, string  userGender, userRole userRole)
+    User(std::string  userName, int userAge, std::string  userGender, userRole userRole)
         : name(std::move(userName)), age(userAge), gender(std::move(userGender)), role(userRole) {}
 
-    void setName(const string_view& userName);
+    void setName(const std::string_view& userName);
     void setAge(int userAge);
-    void setGender(const string_view& userGender);
+    void setGender(const std::string_view& userGender);
     void setRole(userRole userRole);
-    void setPassword(const string_view& userPassword);
-    [[nodiscard]] string getName() const;
+    void setPassword(const std::string_view& userPassword);
+    [[nodiscard]] std::string getName() const;
     [[nodiscard]] int getAge() const;
-    [[nodiscard]] string getGender() const;
+    [[nodiscard]] std::string getGender() const;
     [[nodiscard]] userRole getRole() const;
-    [[nodiscard]] string getPassword() const;
-    [[nodiscard]] string roleAsString() const;
+    [[nodiscard]] std::string getPassword() const;
+    [[nodiscard]] std::string roleAsString() const;
 };
 
 #endif // USER_H

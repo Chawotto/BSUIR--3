@@ -12,9 +12,7 @@ DeveloperMenu::DeveloperMenu(MainWindow *mainWin, EnterWindow *enterWin, const Q
     ui->updateButton->setVisible(false);
 }
 
-DeveloperMenu::~DeveloperMenu() {
-    delete ui;
-}
+DeveloperMenu::~DeveloperMenu() = default;
 
 QString formatGame(const Game& game) {
     return QString("<b>Name:</b> %1<br><b>Genre:</b> %2<br><b>Version:</b> %3<br><b>Weight:</b> %4 Gb<br><b>Cost:</b> $%5<br><br>")

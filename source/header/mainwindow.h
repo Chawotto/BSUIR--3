@@ -29,7 +29,7 @@ private:
     Ui::MainWindow *ui;
     RegistrationWindow *registrationWindow = nullptr;
     EnterWindow *enterWindow = nullptr;
-    QLabel *logoLabel;
+    QLabel *logoLabel{};
 };
 
 #endif // MAINWINDOW_H

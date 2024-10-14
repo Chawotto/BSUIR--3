@@ -5,18 +5,15 @@
 #include "header/gamermenu.h"
 #include <QFile>
 #include <QMessageBox>
+#include <memory>
 
 EnterWindow::EnterWindow(MainWindow *mainWin, QWidget *parent) :
-    QWidget(parent), ui(new Ui::EnterWindow), developerMenu(nullptr), gamerMenu(nullptr), mainWindow(mainWin) {
+    QWidget(parent), ui(new Ui::EnterWindow), mainWindow(mainWin) {
     ui->setupUi(this);
     connect(ui->loginButton, &QPushButton::clicked, this, &EnterWindow::on_loginButton_clicked);
 }
 
-EnterWindow::~EnterWindow() {
-    delete ui;
-    delete developerMenu;
-    delete gamerMenu;
-}
+EnterWindow::~EnterWindow() = default;
 
 void EnterWindow::on_loginButton_clicked() {
     QString username = ui->usernameLineEdit->text();
@@ -29,7 +26,7 @@ void EnterWindow::on_loginButton_clicked() {
     }
 
     QString line;
-    bool userFound = false;
+    std::unique_ptr<QWidget> menu;
     while (!file.atEnd()) {
         line = file.readLine();
         QStringList fields = line.split(",");
@@ -39,31 +36,24 @@ void EnterWindow::on_loginButton_clicked() {
             QString userRole = fields[4].trimmed();
 
             if (storedUsername == username && storedPassword == password) {
-                userFound = true;
-                file.close();
-
                 if (userRole == "Developer") {
-                    delete developerMenu;
-                    developerMenu = new DeveloperMenu(mainWindow, this, username);
-                    developerMenu->show();
+                    menu = std::make_unique<DeveloperMenu>(mainWindow, this, username);
                 } else if (userRole == "Gamer") {
-                    delete gamerMenu;
-                    gamerMenu = new GamerMenu(mainWindow, this, username);
-                    gamerMenu->show();
+                    menu = std::make_unique<GamerMenu>(mainWindow, this, username);
                 }
-
-                this->close();
-                return;
+                break;
             }
         }
     }
 
     file.close();
 
-    if (!userFound) {
+    if (menu) {
+        menu->show();
+        this->close();
+    } else {
         QMessageBox::warning(this, "Ошибка", "Неверное имя пользователя или пароль.");
     }
-
 }
 
 void EnterWindow::clearInputs() const {
@@ -72,8 +62,7 @@ void EnterWindow::clearInputs() const {
 }
 
 void EnterWindow::on_backButton_clicked() {
-    ui->usernameLineEdit->clear();
-    ui->passwordLineEdit->clear();
+    clearInputs();
     this->close();
     if (mainWindow) {
         mainWindow->show();

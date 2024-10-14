@@ -11,4 +11,4 @@
 #include <vector>
 
 void deleteGameFromFile(const std::string_view& name, const std::string& filename);
-void updateGameInFile(const vector<Game>& games, const string& filename);
+void updateGameInFile(const std::vector<Game>& games, const std::string& filename);

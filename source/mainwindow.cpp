@@ -19,9 +19,7 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->exitButton, &QPushButton::clicked, this, &MainWindow::on_exitButton_clicked);
 }
 
-MainWindow::~MainWindow() {
-    delete ui;
-}
+MainWindow::~MainWindow() = default;
 
 void MainWindow::on_signInButton_clicked() {
     if (!enterWindow) {

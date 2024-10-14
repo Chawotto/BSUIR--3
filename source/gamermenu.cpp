@@ -14,9 +14,7 @@ GamerMenu::GamerMenu(MainWindow *mainWin, EnterWindow *enterWin, const QString &
     ui->deleteButton->setVisible(false);
 }
 
-GamerMenu::~GamerMenu() {
-    delete ui;
-}
+GamerMenu::~GamerMenu()= default;
 
 QString formatGameGamer(const Game& game) {
     return QString("<b>Name:</b> %1<br><b>Genre:</b> %2<br><b>Version:</b> %3<br><b>Weight:</b> %4 Gb<br><b>Cost:</b> $%5<br><br>")

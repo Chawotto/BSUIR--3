@@ -2,6 +2,8 @@
 #define DEVELOPERMENU_H
 
 #include <QWidget>
+#include <vector>
+#include "Game.h"
 
 class MainWindow;
 class EnterWindow;
@@ -24,6 +26,9 @@ public:
         void on_backButton_clicked();
         void on_updateButton_clicked();
         void on_deleteButton_clicked();
+        bool updateGameVersion(std::vector<Game> &games, const std::string_view &gameName);
+        std::vector<Game> readGamesFromFile(std::ifstream &in);
+        void DeveloperMenu::updateGamesForAllUsers(const std::string &gameName);
 
 private:
     Ui::DeveloperMenu *ui;

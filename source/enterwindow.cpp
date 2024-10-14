@@ -19,40 +19,52 @@ void EnterWindow::on_loginButton_clicked() {
     QString username = ui->usernameLineEdit->text();
     QString password = ui->passwordLineEdit->text();
 
+    if (!validateUser(username, password)) {
+        QMessageBox::warning(this, "Ошибка", "Неверное имя пользователя или пароль.");
+    }
+}
+
+bool EnterWindow::validateUser(const QString &username, const QString &password) {
     QFile file("users.txt");
     if (!file.open(QIODevice::ReadOnly | QIODevice::Text)) {
         QMessageBox::critical(this, "Ошибка", "Не удалось открыть файл пользователей.");
-        return;
+        return false;
     }
 
     QString line;
-    std::unique_ptr<QWidget> menu;
     while (!file.atEnd()) {
         line = file.readLine();
         QStringList fields = line.split(",");
-        if (fields.size() == 5) {
-            QString storedUsername = fields[0].trimmed();
-            QString storedPassword = fields[1].trimmed();
-            QString userRole = fields[4].trimmed();
+        if (fields.size() != 5) {
+            continue;
+        }
 
-            if (storedUsername == username && storedPassword == password) {
-                if (userRole == "Developer") {
-                    menu = std::make_unique<DeveloperMenu>(mainWindow, this, username);
-                } else if (userRole == "Gamer") {
-                    menu = std::make_unique<GamerMenu>(mainWindow, this, username);
-                }
-                break;
-            }
+        QString storedUsername = fields[0].trimmed();
+        QString storedPassword = fields[1].trimmed();
+        QString userRole = fields[4].trimmed();
+
+        if (storedUsername == username && storedPassword == password) {
+            openUserMenu(userRole, username);
+            file.close();
+            return true;
         }
     }
 
     file.close();
+    return false;
+}
+
+void EnterWindow::openUserMenu(const QString &userRole, const QString &username) {
+    std::unique_ptr<QWidget> menu;
+    if (userRole == "Developer") {
+        menu = std::make_unique<DeveloperMenu>(mainWindow, this, username);
+    } else if (userRole == "Gamer") {
+        menu = std::make_unique<GamerMenu>(mainWindow, this, username);
+    }
 
     if (menu) {
         menu->show();
         this->close();
-    } else {
-        QMessageBox::warning(this, "Ошибка", "Неверное имя пользователя или пароль.");
     }
 }
 

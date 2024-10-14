@@ -11,8 +11,6 @@
 
 using namespace std;
 
-bool addGameToLibrary(const string_view& game_name, const string& userFileName);
-
 bool addGameToLibrary(const string_view& game_name, const string& userFileName) {
     ifstream in("games.txt");
     string name;
@@ -31,7 +29,7 @@ bool addGameToLibrary(const string_view& game_name, const string& userFileName) 
         in.ignore();
         if (name == game_name) {
             found = true;
-            if (ofstream out(userFileName, ios::app); out.is_open()) { // Используем файл пользователя
+            if (ofstream out(userFileName, ios::app); out.is_open()) {
                 Game game(name, genre, static_cast<versions>(versionInt), weight, cost);
                 game.saveToFile(out);
                 out.close();

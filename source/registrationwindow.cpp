@@ -14,9 +14,7 @@ RegistrationWindow::RegistrationWindow(MainWindow *mainWin, QWidget *parent) :
     connect(ui->backButton, &QPushButton::clicked, this, &RegistrationWindow::on_backButton_clicked);
 }
 
-RegistrationWindow::~RegistrationWindow() {
-    delete ui;
-}
+RegistrationWindow::~RegistrationWindow() = default;
 
 void RegistrationWindow::saveUser() {
     QString name = ui->nameLineEdit->text();

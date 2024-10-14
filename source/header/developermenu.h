@@ -28,7 +28,7 @@ public:
         void on_deleteButton_clicked();
         bool updateGameVersion(std::vector<Game> &games, const std::string_view &gameName);
         std::vector<Game> readGamesFromFile(std::ifstream &in);
-        void DeveloperMenu::updateGamesForAllUsers(const std::string &gameName);
+        void updateGamesForAllUsers(const std::string &gameName);
 
 private:
     Ui::DeveloperMenu *ui;

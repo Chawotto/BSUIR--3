@@ -40,7 +40,7 @@ std::vector<QString> getGamerUsernames() {
         if (!std::getline(iss, temp, ',')) continue;
         username = QString::fromStdString(temp);
 
-        for (int i = 0; i < 4; ++i) std::getline(iss, temp, ','); // пропускаем поля
+        for (int i = 0; i < 4; ++i) std::getline(iss, temp, ',');
 
         if (std::getline(iss, temp, ',') && QString::fromStdString(temp) == "Gamer") {
             gamers.push_back(username);

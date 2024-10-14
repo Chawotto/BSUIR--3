@@ -3,6 +3,7 @@
 #include <fstream>
 #include <string>
 #include <utility>
+#include <format>
 #include <vector>
 
 enum class versions {
@@ -22,8 +23,8 @@ private:
     float cost;
 
 public:
-    Game(const std::string& n, const std::string& g, versions v, float w, float c)
-            : name(n), genre(g), version(v), weight(w), cost(c) {}
+    Game(std::string  n, std::string  g, versions v, float w, float c)
+            : name(std::move(n)), genre(std::move(g)), version(v), weight(w), cost(c) {}
 
     void saveToFile(std::ofstream& out) const {
         out << name << '\n' << genre << '\n' << std::to_underlying(version) << '\n'
@@ -62,7 +63,7 @@ public:
         in >> v >> w >> c;
         in.ignore();
 
-        return Game(n, g, static_cast<versions>(v), w, c);
+        return {n, g, static_cast<versions>(v), w, c};
     }
 
     void display() const;
@@ -73,9 +74,8 @@ public:
     [[nodiscard]] float getCost() const;
 
     [[nodiscard]] std::string toString() const {
-        return "Name: " + name + ", Genre: " + genre +
-               ", Version: " + versionToString() +
-               ", Weight: " + std::to_string(weight) + " Gb, Cost: $" + std::to_string(cost);
+        return std::format("Name: {}, Genre: {}, Version: {}, Weight: {} Gb, Cost: ${}",
+                           name, genre, versionToString(), weight, cost);
     }
 
     friend std::ostream& operator<<(std::ostream& os, const Game& game) {

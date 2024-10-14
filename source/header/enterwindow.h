@@ -24,8 +24,8 @@ public:
     private slots:
         void on_loginButton_clicked();
         void on_backButton_clicked();
-        bool EnterWindow::validateUser(const QString &username, const QString &password);
-        void EnterWindow::openUserMenu(const QString &userRole, const QString &username);
+        bool validateUser(const QString &username, const QString &password);
+        void openUserMenu(const QString &userRole, const QString &username);
 
 private:
     Ui::EnterWindow *ui;

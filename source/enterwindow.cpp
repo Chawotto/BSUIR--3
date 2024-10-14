@@ -20,20 +20,19 @@ void EnterWindow::on_loginButton_clicked() {
     QString password = ui->passwordLineEdit->text();
 
     if (!validateUser(username, password)) {
-        QMessageBox::warning(this, "Ошибка", "Неверное имя пользователя или пароль.");
+        QMessageBox::warning(this, "Error", "Invalid username or password");
     }
 }
 
 bool EnterWindow::validateUser(const QString &username, const QString &password) {
     QFile file("users.txt");
     if (!file.open(QIODevice::ReadOnly | QIODevice::Text)) {
-        QMessageBox::critical(this, "Ошибка", "Не удалось открыть файл пользователей.");
+        QMessageBox::critical(this, "Error", "Error opening file");
         return false;
     }
 
-    QString line;
     while (!file.atEnd()) {
-        line = file.readLine();
+        QString line = file.readLine();
         QStringList fields = line.split(",");
         if (fields.size() != 5) {
             continue;
@@ -55,7 +54,7 @@ bool EnterWindow::validateUser(const QString &username, const QString &password)
 }
 
 void EnterWindow::openUserMenu(const QString &userRole, const QString &username) {
-    std::unique_ptr<QWidget> menu;
+
     if (userRole == "Developer") {
         menu = std::make_unique<DeveloperMenu>(mainWindow, this, username);
     } else if (userRole == "Gamer") {
@@ -67,6 +66,7 @@ void EnterWindow::openUserMenu(const QString &userRole, const QString &username)
         this->close();
     }
 }
+
 
 void EnterWindow::clearInputs() const {
     ui->usernameLineEdit->clear();

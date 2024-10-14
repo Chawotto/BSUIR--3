@@ -2,12 +2,13 @@
 #include "header/devOpt.h"
 #include <QMessageBox>
 #include <QInputDialog>
-#include <memory>
+#include <utility>
 #include "header/Game.h"
 #include "header/mainwindow.h"
 
-DeveloperMenu::DeveloperMenu(MainWindow *mainWin, EnterWindow *enterWin, const QString &username, QWidget *parent) :
-    QWidget(parent), ui(new Ui::DeveloperMenu()), mainWindow(mainWin), enterWindow(enterWin), currentUser(username) {
+DeveloperMenu::DeveloperMenu(MainWindow *mainWin, EnterWindow *enterWin, QString username, QWidget *parent) :
+    QWidget(parent), ui(new Ui::DeveloperMenu()), mainWindow(mainWin), enterWindow(enterWin),
+    currentUser(std::move(username)) {
     ui->setupUi(this);
     ui->deleteButton->setVisible(false);
     ui->updateButton->setVisible(false);
@@ -185,7 +186,7 @@ void DeveloperMenu::updateGamesForAllUsers(const std::string &gameName) {
         std::ifstream inGamer(gamerFileName.toStdString());
         if (!inGamer.is_open()) continue;
 
-        std::vector<Game> gamerGames = this->readGamesFromFile(inGamer);
+        std::vector<Game> gamerGames = readGamesFromFile(inGamer);
         inGamer.close();
 
         this->updateGameVersion(gamerGames, gameName);

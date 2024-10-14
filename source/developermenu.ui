@@ -16,10 +16,10 @@
   <widget class="QWidget" name="centralwidget" native="true">
    <property name="geometry">
     <rect>
-     <x>60</x>
+     <x>50</x>
      <y>0</y>
-     <width>600</width>
-     <height>400</height>
+     <width>641</width>
+     <height>381</height>
     </rect>
    </property>
    <widget class="QLabel" name="titleLabel">
@@ -70,14 +70,22 @@
    <widget class="QComboBox" name="versionComboBox">
     <property name="geometry">
      <rect>
-      <x>110</x>
+      <x>49</x>
       <y>120</y>
-      <width>500</width>
-      <height>30</height>
+      <width>501</width>
+      <height>31</height>
      </rect>
     </property>
     <property name="visible">
      <bool>false</bool>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">
+                    QComboBox {
+                    border-radius: 10px;
+                    padding: 10px;
+                    }
+                </string>
     </property>
     <item>
      <property name="text">
@@ -108,8 +116,8 @@
    <widget class="QPushButton" name="createButton">
     <property name="geometry">
      <rect>
-      <x>70</x>
-      <y>130</y>
+      <x>140</x>
+      <y>170</y>
       <width>201</width>
       <height>61</height>
      </rect>
@@ -134,8 +142,8 @@
    <widget class="QPushButton" name="findButton">
     <property name="geometry">
      <rect>
-      <x>330</x>
-      <y>130</y>
+      <x>360</x>
+      <y>170</y>
       <width>201</width>
       <height>61</height>
      </rect>
@@ -160,8 +168,8 @@
    <widget class="QPushButton" name="readGamesButton">
     <property name="geometry">
      <rect>
-      <x>330</x>
-      <y>200</y>
+      <x>360</x>
+      <y>240</y>
       <width>201</width>
       <height>61</height>
      </rect>

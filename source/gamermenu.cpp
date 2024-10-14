@@ -6,10 +6,11 @@
 #include <QInputDialog>
 #include "header/mainwindow.h"
 #include <fstream>
+#include <utility>
 #include <vector>
 
-GamerMenu::GamerMenu(MainWindow *mainWin, EnterWindow *enterWin, const QString &username, QWidget *parent) :
-    QWidget(parent), ui(new Ui::GamerMenu), mainWindow(mainWin), enterWindow(enterWin), currentUser(username) {
+GamerMenu::GamerMenu(MainWindow *mainWin, EnterWindow *enterWin, QString username, QWidget *parent) :
+    QWidget(parent), ui(new Ui::GamerMenu), mainWindow(mainWin), enterWindow(enterWin), currentUser(std::move(username)) {
     ui->setupUi(this);
     ui->deleteButton->setVisible(false);
 }
@@ -74,11 +75,10 @@ void GamerMenu::on_findGameButton_clicked() {
         return;
     }
 
-    QString foundGameDetails;
     for (auto &game : games) {
         if (game.getName() == name.toStdString()) {
             found = true;
-            foundGameDetails = formatGameGamer(game);
+            QString foundGameDetails = formatGameGamer(game);
             ui->outputTextArea->setHtml(foundGameDetails);
             ui->deleteButton->setVisible(true);
             break;

@@ -23,8 +23,29 @@ private:
     float cost;
 
 public:
-    Game(std::string  n, std::string  g, versions v, float w, float c)
-            : name(std::move(n)), genre(std::move(g)), version(v), weight(w), cost(c) {}
+    Game(std::string n, std::string g, versions v, float w, float c)
+        : name(std::move(n)), genre(std::move(g)), version(v), weight(w), cost(c) {}
+
+    ~Game() = default;
+
+    Game(const Game& other) = default;
+
+    Game& operator=(const Game& other) = default;
+
+    Game(Game&& other) noexcept
+        : name(std::move(other.name)), genre(std::move(other.genre)),
+          version(other.version), weight(other.weight), cost(other.cost) {}
+
+    Game& operator=(Game&& other) noexcept {
+        if (this != &other) {
+            name = std::move(other.name);
+            genre = std::move(other.genre);
+            version = other.version;
+            weight = other.weight;
+            cost = other.cost;
+        }
+        return *this;
+    }
 
     void saveToFile(std::ofstream& out) const {
         out << name << '\n' << genre << '\n' << std::to_underlying(version) << '\n'
@@ -84,15 +105,4 @@ public:
     }
 
     bool operator==(const Game& other) const = default;
-
-    Game& operator=(const Game& other) {
-        if (this != &other) {
-            name = other.name;
-            genre = other.genre;
-            version = other.version;
-            weight = other.weight;
-            cost = other.cost;
-        }
-        return *this;
-    }
 };

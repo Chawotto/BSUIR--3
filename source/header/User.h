@@ -21,11 +21,11 @@ private:
     [[nodiscard]] std::string roleToString() const {
         switch (role) {
             using enum userRole;
-            case userRole::Developer:
+            case Developer:
                 return "Developer";
-            case userRole::Gamer:
+            case Gamer:
                 return "Gamer";
-            case userRole::Administrator:
+            case Administrator:
                 return "Administrator";
             default:
                 return "Unknown";

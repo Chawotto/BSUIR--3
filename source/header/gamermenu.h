@@ -14,11 +14,11 @@ class GamerMenu : public QWidget {
     Q_OBJECT
 
 public:
-    explicit GamerMenu(MainWindow *mainWin, EnterWindow *enterWin, const QString &username, QWidget *parent = nullptr);
+    explicit GamerMenu(MainWindow *mainWin, EnterWindow *enterWin, QString username, QWidget *parent = nullptr);
     ~GamerMenu() override;
 
     private slots:
-        void on_buyButton_clicked();
+    void on_buyButton_clicked();
     void on_readLibraryButton_clicked();
     void on_findGameButton_clicked();
     void on_backButton_clicked();

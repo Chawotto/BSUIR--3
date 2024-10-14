@@ -22,16 +22,17 @@ public:
     void clearInputs() const;
 
     private slots:
-        void on_loginButton_clicked();
-        void on_backButton_clicked();
-        bool validateUser(const QString &username, const QString &password);
-        void openUserMenu(const QString &userRole, const QString &username);
+    void on_loginButton_clicked();
+    void on_backButton_clicked();
+    bool validateUser(const QString &username, const QString &password);
+    void openUserMenu(const QString &userRole, const QString &username);
 
 private:
     Ui::EnterWindow *ui;
     DeveloperMenu *developerMenu = nullptr;
     GamerMenu *gamerMenu = nullptr;
     MainWindow *mainWindow;
+    std::unique_ptr<QWidget> menu;
 };
 
 #endif // ENTERWINDOW_H

@@ -1,5 +1,0 @@
-C:/Users/alexe/Desktop/MorrsQT/cmake-build-debug/CMakeFiles/MorrsQT.dir
-C:/Users/alexe/Desktop/MorrsQT/cmake-build-debug/CMakeFiles/edit_cache.dir
-C:/Users/alexe/Desktop/MorrsQT/cmake-build-debug/CMakeFiles/rebuild_cache.dir
-C:/Users/alexe/Desktop/MorrsQT/cmake-build-debug/CMakeFiles/MorrsQT_autogen_timestamp_deps.dir
-C:/Users/alexe/Desktop/MorrsQT/cmake-build-debug/CMakeFiles/MorrsQT_autogen.dir

@@ -1,2 +1,0 @@
-moc:5bad6b5fae6afda1c502542a9bab33a80438f23c19886acc1b39a71a1a64e8e9
-uic:dcf3f1ba7cce532edfba2b7a70dd3abdf39db4fb45bcbb4c2f04fcabc2d2ab6b

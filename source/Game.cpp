@@ -1,36 +1,75 @@
-#include <iostream>
-#include <fstream>
-#include <string>
 #include "header/Game.h"
+#include <fstream>
+#include <iostream>
+#include <utility>
 
-using namespace std;
+Game::Game(std::string n, std::string g, versions v, float w, float c)
+    : name(std::move(n)), genre(std::move(g)), version(v), weight(w), cost(c) {}
+
+void Game::saveToFile(std::ofstream& out) const {
+    out << name << '\n' << genre << '\n' << std::to_underlying(version) << '\n'
+        << weight << '\n' << cost << '\n';
+}
+
+Game Game::readFromFile(std::ifstream& in) {
+    std::string n;
+    std::string g;
+    int v;
+    float w;
+    float c;
+
+    getline(in, n);
+    getline(in, g);
+    in >> v >> w >> c;
+    in.ignore();
+
+    return {n, g, static_cast<versions>(v), w, c};
+}
 
 void Game::display() const {
-    cout << "Name: " << name << endl;
-    cout << "Genre: " << genre << endl;
-    cout << "Version: " << versionToString() << endl;
-    cout << "Weight: " << weight << "Gb" << endl;
-    cout << "Cost: " << cost << "$" << endl;
-    cout << "\n";
+    std::cout << toString() << std::endl;
 }
 
 void Game::updateVersion(versions newVersion) {
     version = newVersion;
 }
 
-[[nodiscard]] string Game::getName() const {
+std::string Game::getName() const {
     return name;
 }
 
-[[nodiscard]] float Game::getWeight() const {
+std::string Game::getGenre() const {
+    return genre;
+}
+
+float Game::getWeight() const {
     return weight;
 }
 
-[[nodiscard]] float Game::getCost() const {
+float Game::getCost() const {
     return cost;
 }
 
-[[nodiscard]] string Game::getGenre() const {
-    return genre;
+std::string Game::versionToString() const {
+    switch (version) {
+        using enum versions;
+        case Pre_Alpha:
+            return "Pre_Alpha";
+        case Alfa:
+            return "Alfa";
+        case Beta:
+            return "Beta";
+        case Release_candidate:
+            return "Release_candidate";
+        case General_availability:
+            return "General_availability";
+        default:
+            return "Unknown";
+    }
+}
+
+std::string Game::toString() const {
+    return std::format("Name: {}, Genre: {}, Version: {}, Weight: {} Gb, Cost: ${}",
+                       name, genre, versionToString(), weight, cost);
 }
 

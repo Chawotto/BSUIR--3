@@ -3,6 +3,7 @@
 #include <QMessageBox>
 #include <QInputDialog>
 #include <utility>
+#include <fstream>
 #include "header/Game.h"
 #include "header/mainwindow.h"
 

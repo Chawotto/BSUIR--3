@@ -25,7 +25,7 @@ public:
     void on_deleteButton_clicked();
 
 private:
-    Ui::GamerMenu *ui;
+    std::unique_ptr<Ui::GamerMenu> ui;
     MainWindow *mainWindow;
     EnterWindow *enterWindow;
     QString currentUser;

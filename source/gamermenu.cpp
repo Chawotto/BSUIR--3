@@ -10,7 +10,11 @@
 #include <vector>
 
 GamerMenu::GamerMenu(MainWindow *mainWin, EnterWindow *enterWin, QString username, QWidget *parent) :
-    QWidget(parent), ui(new Ui::GamerMenu), mainWindow(mainWin), enterWindow(enterWin), currentUser(std::move(username)) {
+    QWidget(parent),
+    ui(std::make_unique<Ui::GamerMenu>()),
+    mainWindow(mainWin),
+    enterWindow(enterWin),
+    currentUser(std::move(username)) {
     ui->setupUi(this);
     ui->deleteButton->setVisible(false);
 }

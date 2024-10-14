@@ -28,7 +28,7 @@ public:
     void openUserMenu(const QString &userRole, const QString &username);
 
 private:
-    Ui::EnterWindow *ui;
+    std::unique_ptr<Ui::EnterWindow> ui;
     DeveloperMenu *developerMenu = nullptr;
     GamerMenu *gamerMenu = nullptr;
     MainWindow *mainWindow;

@@ -7,7 +7,9 @@
 #include "header/mainwindow.h"
 
 RegistrationWindow::RegistrationWindow(MainWindow *mainWin, QWidget *parent) :
-    QWidget(parent), ui(new Ui::RegistrationWindow), mainWindow(mainWin) {
+    QWidget(parent),
+    ui(std::make_unique<Ui::RegistrationWindow>()),
+    mainWindow(mainWin) {
     ui->setupUi(this);
 
     connect(ui->saveButton, &QPushButton::clicked, this, &RegistrationWindow::saveUser);

@@ -8,7 +8,10 @@
 #include "header/mainwindow.h"
 
 DeveloperMenu::DeveloperMenu(MainWindow *mainWin, EnterWindow *enterWin, QString username, QWidget *parent) :
-    QWidget(parent), ui(new Ui::DeveloperMenu()), mainWindow(mainWin), enterWindow(enterWin),
+    QWidget(parent),
+    ui(std::make_unique<Ui::DeveloperMenu>()),
+    mainWindow(mainWin),
+    enterWindow(enterWin),
     currentUser(std::move(username)) {
     ui->setupUi(this);
     ui->deleteButton->setVisible(false);

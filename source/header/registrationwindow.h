@@ -26,7 +26,7 @@ public:
         void on_backButton_clicked();
 
 private:
-    Ui::RegistrationWindow *ui;
+    std::unique_ptr<Ui::RegistrationWindow> ui;
     MainWindow *mainWindow;
 
 };

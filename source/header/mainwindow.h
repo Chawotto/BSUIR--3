@@ -4,6 +4,7 @@
 #include <QLabel>
 #include "registrationwindow.h"
 #include "enterwindow.h"
+#include <memory>
 
 namespace Ui {
     class DeveloperMenu;
@@ -26,9 +27,9 @@ public:
     void on_exitButton_clicked();
 
 private:
-    Ui::MainWindow *ui;
-    RegistrationWindow *registrationWindow = nullptr;
-    EnterWindow *enterWindow = nullptr;
+    std::unique_ptr<Ui::MainWindow> ui;
+    std::unique_ptr<EnterWindow> enterWindow;
+    std::unique_ptr<RegistrationWindow> registrationWindow;
     QLabel *logoLabel{};
 };
 

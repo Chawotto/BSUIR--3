@@ -8,7 +8,9 @@
 #include <memory>
 
 EnterWindow::EnterWindow(MainWindow *mainWin, QWidget *parent) :
-    QWidget(parent), ui(new Ui::EnterWindow), mainWindow(mainWin) {
+    QWidget(parent),
+    ui(std::make_unique<Ui::EnterWindow>()),
+    mainWindow(mainWin) {
     ui->setupUi(this);
     connect(ui->loginButton, &QPushButton::clicked, this, &EnterWindow::on_loginButton_clicked);
 }

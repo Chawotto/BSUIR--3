@@ -32,7 +32,7 @@ public:
     void updateGamesForAllUsers(const std::string &gameName);
 
 private:
-    Ui::DeveloperMenu *ui;
+    std::unique_ptr<Ui::DeveloperMenu> ui;
     MainWindow *mainWindow;
     EnterWindow *enterWindow;
     QString currentUser;

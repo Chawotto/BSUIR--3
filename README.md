@@ -1,4 +1,6 @@
-
+[![Bugs](https://sonarcloud.io/api/project_badges/measure?project=Chawotto_MorrS&metric=bugs)](https://sonarcloud.io/summary/new_code?id=Chawotto_MorrS)
+[![Reliability Rating](https://sonarcloud.io/api/project_badges/measure?project=Chawotto_MorrS&metric=reliability_rating)](https://sonarcloud.io/summary/new_code?id=Chawotto_MorrS)
+[![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=Chawotto_MorrS&metric=security_rating)](https://sonarcloud.io/summary/new_code?id=Chawotto_MorrS)
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=Chawotto_MorrS&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=Chawotto_MorrS)
 
 # MorrS

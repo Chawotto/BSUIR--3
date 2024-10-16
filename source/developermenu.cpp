@@ -63,8 +63,7 @@ void saveGameToFile(const Game &game, const QString &fileName) {
 
     Json::Value jsonData;
 
-    std::ifstream inFile(fileName.toStdString());
-    if (inFile.is_open()) {
+    if (std::ifstream inFile(fileName.toStdString()); inFile.is_open()) {
         inFile >> jsonData;
         inFile.close();
     }

@@ -14,7 +14,7 @@ class DeveloperUser : public User {
 private:
     std::string level;
     std::string company;
-    int createdGamesCount;
+    int createdGamesCount = 0;
 
 public:
     DeveloperUser(std::string userName, int userAge, std::string userGender);

@@ -44,13 +44,12 @@ bool EnterWindow::validateUser(const QString &username, const QString &password)
     Json::CharReaderBuilder reader;
     std::string errs;
 
-    std::stringstream ss(fileData.toStdString());
-    if (!Json::parseFromStream(reader, ss, &jsonData, &errs)) {
+    if (std::stringstream ss(fileData.toStdString()); !parseFromStream(reader, ss, &jsonData, &errs)) {
         QMessageBox::critical(this, "Error", "Error parsing JSON: " + QString::fromStdString(errs));
         return false;
     }
 
-    for (const auto& user : jsonData) {
+    bool validUser = std::ranges::any_of(jsonData, [&](const auto& user) {
         QString storedUsername = QString::fromStdString(user["name"].asString()).trimmed();
         QString storedPassword = QString::fromStdString(user["password"].asString()).trimmed();
         QString userRole = QString::fromStdString(user["role"].asString()).trimmed();
@@ -59,10 +58,12 @@ bool EnterWindow::validateUser(const QString &username, const QString &password)
             openUserMenu(userRole, username);
             return true;
         }
-    }
+        return false;
+    });
 
-    return false;
+    return validUser;
 }
+
 
 void EnterWindow::openUserMenu(const QString &userRole, const QString &username) {
     if (userRole == "Developer") {

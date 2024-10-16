@@ -149,11 +149,10 @@ std::vector<Game> readGamesFromFile(const std::string& fileName) {
     return games;
 }
 
-void DeveloperMenu::on_readGamesButton_clicked() {
+void DeveloperMenu::on_readGamesButton_clicked() const {
     QString gamesList;
     QString userFileName = currentUser + ".json";
 
-    std::vector<Game> readGamesFromFile(const std::string& fileName);
     std::vector<Game> games = readGamesFromFile(userFileName.toStdString());
 
     for (const auto &game : games) {
@@ -173,7 +172,6 @@ void DeveloperMenu::on_findButton_clicked() {
 
     QString userFileName = currentUser + ".json";
 
-    std::vector<Game> readGamesFromFile(const std::string& fileName);
     std::vector<Game> games = readGamesFromFile(userFileName.toStdString());
 
     auto it = std::ranges::find_if(games, [&](const Game &game) { return game.getName() == name.toStdString(); });
@@ -266,9 +264,7 @@ void DeveloperMenu::on_updateButton_clicked() {
     QString userFileName = currentUser + ".json";
     std::vector<Game> userGames = readGamesFromFile(userFileName.toStdString());
 
-    bool gameUpdated = updateGameVersion(userGames, name.toStdString());
-
-    if (gameUpdated) {
+    if (updateGameVersion(userGames, name.toStdString())) {
         saveGamesToFile(userGames, userFileName);
 
         std::vector<Game> allGames = readGamesFromFile("games.json");
@@ -297,7 +293,7 @@ void DeveloperMenu::on_updateButton_clicked() {
     ui->outputTextArea->clear();
 }
 
-bool DeveloperMenu::updateGameVersion(std::vector<Game> &games, const std::string_view &gameName) {
+bool DeveloperMenu::updateGameVersion(std::vector<Game> &games, const std::string_view &gameName) const {
     for (auto &game : games) {
         if (game.getName() == gameName) {
             int selectedIndex = ui->versionComboBox->currentIndex();

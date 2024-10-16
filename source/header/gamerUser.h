@@ -12,7 +12,7 @@
 
 class GamerUser : public User {
 private:
-    int countGamesInLabrary;
+    int countGamesInLabrary = 0;
     std::string favoriteGame;
 
 public:

@@ -91,10 +91,9 @@ bool writeUserGamesToFile(const std::string& filename, const Json::Value& userGa
         out << userGamesData;
         out.close();
         return true;
-    } else {
-        std::cout << "Error opening library file for writing." << std::endl;
-        return false;
     }
+    std::cout << "Error opening library file for writing." << std::endl;
+    return false;
 }
 
 void updateGameInGamerFile(const std::vector<Game>& games, const std::string& filename) {
@@ -154,12 +153,11 @@ bool addGameToLibrary(const std::string_view& game_name, const std::string& user
     in.close();
 
     Json::Value userGamesData;
-    {
-        std::ifstream userFile(userFileName);
-        if (userFile.is_open()) {
-            userFile >> userGamesData;
-            userFile.close();
-        }
+
+    std::ifstream userFile(userFileName);
+    if (userFile.is_open()) {
+        userFile >> userGamesData;
+        userFile.close();
     }
 
     for (const auto& jsonGame : jsonData) {
@@ -176,7 +174,7 @@ bool addGameToLibrary(const std::string_view& game_name, const std::string& user
         }
     }
 
-    return false; // Игру не найдено
+    return false;
 }
 
 void deleteGameFromGamerFile(const std::string_view& name, const std::string& filename) {

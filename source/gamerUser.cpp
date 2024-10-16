@@ -5,5 +5,5 @@
 #include "header/gamerUser.h"
 
 GamerUser::GamerUser(std::string userName, int userAge, std::string userGender): User(std::move(userName), userAge,
-    std::move(userGender), userRole::Gamer), countGamesInLabrary(0) {
+    std::move(userGender), userRole::Gamer) {
 }

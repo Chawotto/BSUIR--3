@@ -12,8 +12,7 @@ void Game::saveToFile(const std::string& filename) const {
     jsonData["weight"] = weight;
     jsonData["cost"] = cost;
 
-    std::ofstream out(filename);
-    if (out.is_open()) {
+    if (std::ofstream out(filename); out.is_open()) {
         out << jsonData;
         out.close();
     } else {
@@ -29,7 +28,7 @@ Game Game::readFromFile(const std::string& filename) {
         in.close();
     }
 
-    std::string versionStr = jsonData["version"].asString();
+    const std::string versionStr = jsonData["version"].asString();
 
     versions version;
     if (versionStr == "Pre_Alpha") {

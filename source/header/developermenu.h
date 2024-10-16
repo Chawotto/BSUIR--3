@@ -22,12 +22,12 @@ public:
 
     private slots:
     void on_createButton_clicked();
-    void on_readGamesButton_clicked();
+    void on_readGamesButton_clicked() const;
     void on_findButton_clicked();
     void on_backButton_clicked();
     void on_updateButton_clicked();
     void on_deleteButton_clicked();
-    bool updateGameVersion(std::vector<Game> &games, const std::string_view &gameName);
+    bool updateGameVersion(std::vector<Game> &games, const std::string_view &gameName) const;
 
 private:
     std::unique_ptr<Ui::DeveloperMenu> ui;

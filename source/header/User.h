@@ -59,7 +59,7 @@ public:
     [[nodiscard]] int getAge() const;
     [[nodiscard]] std::string getGender() const;
     [[nodiscard]] userRole getRole() const;
-    [[nodiscard]] std::string getPassword();
+    [[nodiscard]] std::string getPassword() const;
     [[nodiscard]] std::string roleAsString() const;
 };
 

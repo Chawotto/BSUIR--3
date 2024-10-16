@@ -22,19 +22,20 @@ void updateGameInFile(const std::vector<Game>& games, const std::string& filenam
         jsonGame["genre"] = game.getGenre();
 
         switch (game.getVersion()) {
-            case versions::Pre_Alpha:
+            using enum versions;
+            case Pre_Alpha:
                 jsonGame["version"] = "Pre_Alpha";
             break;
-            case versions::Alfa:
+            case Alfa:
                 jsonGame["version"] = "Alfa";
             break;
-            case versions::Beta:
+            case Beta:
                 jsonGame["version"] = "Beta";
             break;
-            case versions::Release_Candidate:
+            case Release_Candidate:
                 jsonGame["version"] = "Release_Candidate";
             break;
-            case versions::General_Availability:
+            case General_Availability:
                 jsonGame["version"] = "General_Availability";
             break;
         }
@@ -62,19 +63,20 @@ void deleteGameFromFile(const std::string_view& name, const std::string& filenam
         in >> jsonData;
 
         for (const auto& jsonGame : jsonData) {
+            using enum versions;
             std::string versionStr = jsonGame["version"].asString();
 
             versions version;
             if (versionStr == "Pre_Alpha") {
-                version = versions::Pre_Alpha;
+                version = Pre_Alpha;
             } else if (versionStr == "Alfa") {
-                version = versions::Alfa;
+                version = Alfa;
             } else if (versionStr == "Beta") {
-                version = versions::Beta;
+                version = Beta;
             } else if (versionStr == "Release_Candidate") {
-                version = versions::Release_Candidate;
+                version = Release_Candidate;
             } else if (versionStr == "General_Availability") {
-                version = versions::General_Availability;
+                version = General_Availability;
             } else {
                 continue;
             }

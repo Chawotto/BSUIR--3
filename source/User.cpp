@@ -41,7 +41,7 @@ userRole User::getRole() const {
     return role;
 }
 
-string User::getPassword() {
+string User::getPassword() const {
     return password;
 }
 

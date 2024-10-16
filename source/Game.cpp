@@ -22,8 +22,7 @@ void Game::saveToFile(const std::string& filename) const {
 
 Game Game::readFromFile(const std::string& filename) {
     Json::Value jsonData;
-    std::ifstream in(filename);
-    if (in.is_open()) {
+    if (std::ifstream in(filename); in.is_open()) {
         in >> jsonData;
         in.close();
     }

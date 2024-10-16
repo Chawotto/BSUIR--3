@@ -86,8 +86,7 @@ void addGameToUserLibrary(Json::Value& userGamesData, const Game& game) {
 }
 
 bool writeUserGamesToFile(const std::string& filename, const Json::Value& userGamesData) {
-    std::ofstream out(filename);
-    if (out.is_open()) {
+    if (std::ofstream out(filename); out.is_open()) {
         out << userGamesData;
         out.close();
         return true;
@@ -132,8 +131,7 @@ void updateGameInGamerFile(const std::vector<Game>& games, const std::string& fi
         jsonData.append(jsonGame);
     }
 
-    std::ofstream out(filename);
-    if (out.is_open()) {
+    if (std::ofstream out(filename); out.is_open()) {
         out << jsonData;
         out.close();
     } else {
@@ -154,8 +152,7 @@ bool addGameToLibrary(const std::string_view& game_name, const std::string& user
 
     Json::Value userGamesData;
 
-    std::ifstream userFile(userFileName);
-    if (userFile.is_open()) {
+    if (std::ifstream userFile(userFileName); userFile.is_open()) {
         userFile >> userGamesData;
         userFile.close();
     }

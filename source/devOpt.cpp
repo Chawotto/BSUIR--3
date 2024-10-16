@@ -1,7 +1,3 @@
-//
-// Created by Morra on 07.09.2024.
-//
-
 #include "header/Game.h"
 #include "header/devOpt.h"
 #include <iomanip>
@@ -9,9 +5,31 @@
 #include <fstream>
 #include <string>
 #include <vector>
-#include <json/json.h> // Подключаем jsoncpp
+#include <json/json.h>
 
 using namespace std;
+
+versions stringToVersion(const std::string& versionStr) {
+    using enum versions;
+    if (versionStr == "Pre_Alpha") return Pre_Alpha;
+    if (versionStr == "Alfa") return Alfa;
+    if (versionStr == "Beta") return Beta;
+    if (versionStr == "Release_Candidate") return Release_Candidate;
+    if (versionStr == "General_Availability") return General_Availability;
+    throw std::invalid_argument("Unknown version: " + versionStr);
+}
+
+std::string versionToString(versions version) {
+    switch (version) {
+        using enum versions;
+        case Pre_Alpha: return "Pre_Alpha";
+        case Alfa: return "Alfa";
+        case Beta: return "Beta";
+        case Release_Candidate: return "Release_Candidate";
+        case General_Availability: return "General_Availability";
+        default: throw std::invalid_argument("Unknown version");
+    }
+}
 
 void updateGameInFile(const std::vector<Game>& games, const std::string& filename) {
     Json::Value jsonData;
@@ -20,26 +38,7 @@ void updateGameInFile(const std::vector<Game>& games, const std::string& filenam
         Json::Value jsonGame;
         jsonGame["name"] = game.getName();
         jsonGame["genre"] = game.getGenre();
-
-        switch (game.getVersion()) {
-            using enum versions;
-            case Pre_Alpha:
-                jsonGame["version"] = "Pre_Alpha";
-            break;
-            case Alfa:
-                jsonGame["version"] = "Alfa";
-            break;
-            case Beta:
-                jsonGame["version"] = "Beta";
-            break;
-            case Release_Candidate:
-                jsonGame["version"] = "Release_Candidate";
-            break;
-            case General_Availability:
-                jsonGame["version"] = "General_Availability";
-            break;
-        }
-
+        jsonGame["version"] = versionToString(game.getVersion());
         jsonGame["weight"] = game.getWeight();
         jsonGame["cost"] = game.getCost();
         jsonData.append(jsonGame);
@@ -63,23 +62,7 @@ void deleteGameFromFile(const std::string_view& name, const std::string& filenam
         in >> jsonData;
 
         for (const auto& jsonGame : jsonData) {
-            using enum versions;
-            std::string versionStr = jsonGame["version"].asString();
-
-            versions version;
-            if (versionStr == "Pre_Alpha") {
-                version = Pre_Alpha;
-            } else if (versionStr == "Alfa") {
-                version = Alfa;
-            } else if (versionStr == "Beta") {
-                version = Beta;
-            } else if (versionStr == "Release_Candidate") {
-                version = Release_Candidate;
-            } else if (versionStr == "General_Availability") {
-                version = General_Availability;
-            } else {
-                continue;
-            }
+            versions version = stringToVersion(jsonGame["version"].asString());
 
             Game game(
                 jsonGame["name"].asString(),

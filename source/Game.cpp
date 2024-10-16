@@ -21,6 +21,7 @@ void Game::saveToFile(const std::string& filename) const {
 }
 
 Game Game::readFromFile(const std::string& filename) {
+    using enum versions;
     Json::Value jsonData;
     if (std::ifstream in(filename); in.is_open()) {
         in >> jsonData;
@@ -31,15 +32,15 @@ Game Game::readFromFile(const std::string& filename) {
 
     versions version;
     if (versionStr == "Pre_Alpha") {
-        version = versions::Pre_Alpha;
+        version = Pre_Alpha;
     } else if (versionStr == "Alfa") {
-        version = versions::Alfa;
+        version = Alfa;
     } else if (versionStr == "Beta") {
-        version = versions::Beta;
+        version = Beta;
     } else if (versionStr == "Release_Candidate") {
-        version = versions::Release_Candidate;
+        version = Release_Candidate;
     } else if (versionStr == "General_Availability") {
-        version = versions::General_Availability;
+        version = General_Availability;
     } else {
         throw std::runtime_error(versionStr + "Unknown version in file: ");
     }

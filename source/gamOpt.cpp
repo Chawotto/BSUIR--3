@@ -22,7 +22,7 @@ bool isGameInUserLibrary(const Json::Value& userGamesData, const std::string_vie
 
 Game createGameFromJson(const Json::Value& jsonGame) {
     using enum versions;
-    std::string versionStr = jsonGame["version"].asString();
+    const std::string versionStr = jsonGame["version"].asString();
     versions version;
     if (versionStr == "Pre_Alpha")
         version = Pre_Alpha;

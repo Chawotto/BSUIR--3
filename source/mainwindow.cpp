@@ -14,6 +14,9 @@ MainWindow::MainWindow(QWidget *parent) :
     QPixmap logo("C:/Users/alexe/Desktop/MorrsQT/source/Images/logo.png");
     ui->logoLabel->setPixmap(logo.scaled(ui->logoLabel->size(), Qt::KeepAspectRatio, Qt::SmoothTransformation));
 
+    QPixmap background("C:/Users/alexe/Desktop/MorrsQT/source/Images/background.png");
+    ui->backgroundLabel->setPixmap(background.scaled(ui->backgroundLabel->size(), Qt::KeepAspectRatio, Qt::SmoothTransformation));
+
     connect(ui->signInButton, &QPushButton::clicked, this, &MainWindow::on_signInButton_clicked);
     connect(ui->signUpButton, &QPushButton::clicked, this, &MainWindow::on_signUpButton_clicked);
     connect(ui->exitButton, &QPushButton::clicked, this, &MainWindow::on_exitButton_clicked);

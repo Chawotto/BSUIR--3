@@ -2,29 +2,57 @@
 #include <fstream>
 #include <iostream>
 #include <utility>
+#include <json/json.h>
 
-Game::Game(std::string n, std::string g, versions v, float w, float c)
-    : name(std::move(n)), genre(std::move(g)), version(v), weight(w), cost(c) {}
+void Game::saveToFile(const std::string& filename) const {
+    Json::Value jsonData;
+    jsonData["name"] = name;
+    jsonData["genre"] = genre;
+    jsonData["version"] = std::to_underlying(version);
+    jsonData["weight"] = weight;
+    jsonData["cost"] = cost;
 
-void Game::saveToFile(std::ofstream& out) const {
-    out << name << '\n' << genre << '\n' << std::to_underlying(version) << '\n'
-        << weight << '\n' << cost << '\n';
+    std::ofstream out(filename);
+    if (out.is_open()) {
+        out << jsonData;
+        out.close();
+    } else {
+        std::cerr << "Error opening file." << std::endl;
+    }
 }
 
-Game Game::readFromFile(std::ifstream& in) {
-    std::string n;
-    std::string g;
-    int v;
-    float w;
-    float c;
+Game Game::readFromFile(const std::string& filename) {
+    Json::Value jsonData;
+    std::ifstream in(filename);
+    if (in.is_open()) {
+        in >> jsonData;
+        in.close();
+    }
 
-    getline(in, n);
-    getline(in, g);
-    in >> v >> w >> c;
-    in.ignore();
+    std::string versionStr = jsonData["version"].asString();
 
-    return {n, g, static_cast<versions>(v), w, c};
+    versions version;
+    if (versionStr == "Pre_Alpha") {
+        version = versions::Pre_Alpha;
+    } else if (versionStr == "Alfa") {
+        version = versions::Alfa;
+    } else if (versionStr == "Beta") {
+        version = versions::Beta;
+    } else if (versionStr == "Release_Candidate") {
+        version = versions::Release_Candidate;
+    } else if (versionStr == "General_Availability") {
+        version = versions::General_Availability;
+    } else {
+        throw std::runtime_error(versionStr + "Unknown version in file: ");
+    }
+
+    return {jsonData["name"].asString(),
+            jsonData["genre"].asString(),
+            version,
+            jsonData["weight"].asFloat(),
+            jsonData["cost"].asFloat()};
 }
+
 
 void Game::display() const {
     std::cout << toString() << std::endl;
@@ -59,10 +87,10 @@ std::string Game::versionToString() const {
             return "Alfa";
         case Beta:
             return "Beta";
-        case Release_candidate:
-            return "Release_candidate";
-        case General_availability:
-            return "General_availability";
+        case Release_Candidate:
+            return "Release_Candidate";
+        case General_Availability:
+            return "General_Availability";
         default:
             return "Unknown";
     }
@@ -72,4 +100,3 @@ std::string Game::toString() const {
     return std::format("Name: {}, Genre: {}, Version: {}, Weight: {} Gb, Cost: ${}",
                        name, genre, versionToString(), weight, cost);
 }
-

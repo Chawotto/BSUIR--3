@@ -3,6 +3,7 @@
 
 #include <string>
 #include <utility>
+#include <iostream>
 
 enum class userRole {
     Developer,
@@ -10,7 +11,13 @@ enum class userRole {
     Administrator
 };
 
-class User {
+class AbstractUser {
+public:
+    virtual void displayInfo() const = 0;
+    virtual ~AbstractUser() = default;
+};
+
+class User : public AbstractUser {
 private:
     std::string name;
     int age;
@@ -25,19 +32,23 @@ private:
                 return "Developer";
             case Gamer:
                 return "Gamer";
-            case Administrator:
-                return "Administrator";
             default:
                 return "Unknown";
         }
     }
 
 public:
-
     User() : age(0), role(userRole::Gamer) {}
 
-    User(std::string  userName, int userAge, std::string  userGender, userRole userRole)
+    User(std::string userName, int userAge, std::string userGender, userRole userRole)
         : name(std::move(userName)), age(userAge), gender(std::move(userGender)), role(userRole) {}
+
+    void displayInfo() const override {
+        std::cout << "Name: " << name << ", Age: " << age
+                  << ", Gender: " << gender << ", Role: " << roleToString() << std::endl;
+    }
+
+    ~User() override;
 
     void setName(const std::string_view& userName);
     void setAge(int userAge);
@@ -48,7 +59,7 @@ public:
     [[nodiscard]] int getAge() const;
     [[nodiscard]] std::string getGender() const;
     [[nodiscard]] userRole getRole() const;
-    [[nodiscard]] std::string getPassword() const;
+    [[nodiscard]] std::string getPassword();
     [[nodiscard]] std::string roleAsString() const;
 };
 

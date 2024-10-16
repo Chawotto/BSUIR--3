@@ -73,6 +73,11 @@
      <height>61</height>
     </rect>
    </property>
+   <property name="font">
+    <font>
+     <pointsize>15</pointsize>
+    </font>
+   </property>
    <property name="styleSheet">
     <string notr="true">      QPushButton {
           background-color: #8E44AD;
@@ -92,11 +97,16 @@
   <widget class="QPushButton" name="backButton">
    <property name="geometry">
     <rect>
-     <x>510</x>
-     <y>380</y>
-     <width>141</width>
-     <height>61</height>
+     <x>530</x>
+     <y>400</y>
+     <width>121</width>
+     <height>41</height>
     </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>15</pointsize>
+    </font>
    </property>
    <property name="styleSheet">
     <string>
@@ -115,6 +125,32 @@
     <string>Back</string>
    </property>
   </widget>
+  <widget class="QLabel" name="backgroundLabel">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>851</width>
+     <height>561</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">  QPushButton {
+          border-radius: 20px;
+      }</string>
+   </property>
+   <property name="pixmap">
+    <pixmap>Images/background.png</pixmap>
+   </property>
+   <property name="scaledContents">
+    <bool>true</bool>
+   </property>
+  </widget>
+  <zorder>backgroundLabel</zorder>
+  <zorder>usernameLineEdit</zorder>
+  <zorder>passwordLineEdit</zorder>
+  <zorder>loginButton</zorder>
+  <zorder>backButton</zorder>
  </widget>
  <resources/>
  <connections/>

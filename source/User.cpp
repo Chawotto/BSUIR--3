@@ -3,6 +3,8 @@
 
 using namespace std;
 
+User::~User() = default;
+
 void User::setName(const string_view& userName) {
     name = userName;
 }
@@ -39,7 +41,7 @@ userRole User::getRole() const {
     return role;
 }
 
-string User::getPassword() const {
+string User::getPassword() {
     return password;
 }
 

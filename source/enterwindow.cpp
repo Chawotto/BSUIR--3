@@ -6,6 +6,7 @@
 #include <QFile>
 #include <QMessageBox>
 #include <memory>
+#include <json/json.h>
 
 EnterWindow::EnterWindow(MainWindow *mainWin, QWidget *parent) :
     QWidget(parent),
@@ -13,6 +14,9 @@ EnterWindow::EnterWindow(MainWindow *mainWin, QWidget *parent) :
     mainWindow(mainWin) {
     ui->setupUi(this);
     connect(ui->loginButton, &QPushButton::clicked, this, &EnterWindow::on_loginButton_clicked);
+
+    QPixmap background("C:/Users/alexe/Desktop/MorrsQT/source/Images/background.png");
+    ui->backgroundLabel->setPixmap(background.scaled(ui->backgroundLabel->size(), Qt::KeepAspectRatio, Qt::SmoothTransformation));
 }
 
 EnterWindow::~EnterWindow() = default;
@@ -27,36 +31,40 @@ void EnterWindow::on_loginButton_clicked() {
 }
 
 bool EnterWindow::validateUser(const QString &username, const QString &password) {
-    QFile file("users.txt");
+    QFile file("users.json");
     if (!file.open(QIODevice::ReadOnly | QIODevice::Text)) {
         QMessageBox::critical(this, "Error", "Error opening file");
         return false;
     }
 
-    while (!file.atEnd()) {
-        QString line = file.readLine();
-        QStringList fields = line.split(",");
-        if (fields.size() != 5) {
-            continue;
-        }
+    QByteArray fileData = file.readAll();
+    file.close();
 
-        QString storedUsername = fields[0].trimmed();
-        QString storedPassword = fields[1].trimmed();
-        QString userRole = fields[4].trimmed();
+    Json::Value jsonData;
+    Json::CharReaderBuilder reader;
+    std::string errs;
+
+    std::stringstream ss(fileData.toStdString());
+    if (!Json::parseFromStream(reader, ss, &jsonData, &errs)) {
+        QMessageBox::critical(this, "Error", "Error parsing JSON: " + QString::fromStdString(errs));
+        return false;
+    }
+
+    for (const auto& user : jsonData) {
+        QString storedUsername = QString::fromStdString(user["name"].asString()).trimmed();
+        QString storedPassword = QString::fromStdString(user["password"].asString()).trimmed();
+        QString userRole = QString::fromStdString(user["role"].asString()).trimmed();
 
         if (storedUsername == username && storedPassword == password) {
             openUserMenu(userRole, username);
-            file.close();
             return true;
         }
     }
 
-    file.close();
     return false;
 }
 
 void EnterWindow::openUserMenu(const QString &userRole, const QString &username) {
-
     if (userRole == "Developer") {
         menu = std::make_unique<DeveloperMenu>(mainWindow, this, username);
     } else if (userRole == "Gamer") {
@@ -68,7 +76,6 @@ void EnterWindow::openUserMenu(const QString &userRole, const QString &username)
         this->close();
     }
 }
-
 
 void EnterWindow::clearInputs() const {
     ui->usernameLineEdit->clear();

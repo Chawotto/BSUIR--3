@@ -5,7 +5,11 @@ set(CMAKE_CXX_STANDARD 26)
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
 set(CMAKE_AUTOUIC ON)
+set(CMAKE_PREFIX_PATH "C:/Users/alexe/.vcpkg-clion/vcpkg/installed/x64-mingw-dynamic")
+set(CMAKE_TOOLCHAIN_FILE "C:/Users/alexe/.vcpkg-clion/vcpkg/scripts/buildsystems/vcpkg.cmake" CACHE STRING "Vcpkg toolchain file")
 set(CMAKE_PREFIX_PATH "C:\\Qt\\6.7.3\\mingw_64")
+
+find_package(jsoncpp CONFIG REQUIRED)
 
 find_package(Qt6 COMPONENTS
         Core
@@ -34,14 +38,23 @@ add_executable(MorrsQT
         source/registrationwindow.cpp
         source/header/registrationwindow.h
         source/registrationwindow.ui
+        source/DeveloperUser.cpp
+        source/header/DeveloperUser.h
+        source/gamerUser.cpp
+        source/header/gamerUser.h
+        source/devprofile.cpp
+        source/header/devprofile.h
+        source/devprofile.ui
+        source/gameprofile.cpp
+        source/header/gameprofile.h
+        source/gameprofile.ui
 )
-
-
 
 target_link_libraries(MorrsQT
         Qt::Core
         Qt::Gui
         Qt::Widgets
+        JsonCpp::JsonCpp
 )
 
 if (WIN32 AND NOT DEFINED CMAKE_TOOLCHAIN_FILE)

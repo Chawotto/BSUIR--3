@@ -1,74 +1,211 @@
-//
-// Created by Morra on 08.09.2024.
-//
-
 #include "header/devOpt.h"
 #include "header/Game.h"
 #include "header/gamOpt.h"
 #include <iostream>
 #include <fstream>
 #include <string>
+#include <json/json.h>
 
 using namespace std;
 
-bool addGameToLibrary(const string_view& game_name, const string& userFileName) {
-    ifstream in("games.txt");
-    string name;
-    string genre;
-    int versionInt;
-    float weight;
-    float cost;
-    bool found = false;
-
+bool addGameToLibrary(const std::string_view& game_name, const std::string& userFileName) {
+    std::ifstream in("games.json");
     if (!in.is_open()) {
+        std::cout << "Error opening games file." << std::endl;
         return false;
     }
-    while (getline(in, name)) {
-        getline(in, genre);
-        in >> versionInt >> weight >> cost;
-        in.ignore();
-        if (name == game_name) {
+
+    Json::Value jsonData;
+    in >> jsonData;
+    in.close();
+
+    bool found = false;
+    for (const auto& jsonGame : jsonData) {
+        if (jsonGame["name"].asString() == game_name) {
             found = true;
-            if (ofstream out(userFileName, ios::app); out.is_open()) {
-                Game game(name, genre, static_cast<versions>(versionInt), weight, cost);
-                game.saveToFile(out);
+
+            std::string versionStr = jsonGame["version"].asString();
+            versions version;
+            if (versionStr == "Pre_Alpha") {
+                version = versions::Pre_Alpha;
+            } else if (versionStr == "Alfa") {
+                version = versions::Alfa;
+            } else if (versionStr == "Beta") {
+                version = versions::Beta;
+            } else if (versionStr == "Release_Candidate") {
+                version = versions::Release_Candidate;
+            } else if (versionStr == "General_Availability") {
+                version = versions::General_Availability;
+            } else {
+                continue;
+            }
+
+            Game game(
+                jsonGame["name"].asString(),
+                jsonGame["genre"].asString(),
+                version,
+                jsonGame["weight"].asFloat(),
+                jsonGame["cost"].asFloat()
+            );
+
+            Json::Value userGamesData;
+            std::ifstream userFile(userFileName);
+            if (userFile.is_open()) {
+                userFile >> userGamesData;
+                userFile.close();
+            }
+
+            for (const auto& jsonGame : userGamesData) {
+                if (jsonGame["name"].asString() == game_name) {
+                    std::cout << "Game is already in the library." << std::endl;
+                    return false;
+                }
+            }
+
+            Json::Value jsonGameToAdd;
+            jsonGameToAdd["name"] = game.getName();
+            jsonGameToAdd["genre"] = game.getGenre();
+
+            switch (game.getVersion()) {
+                using enum versions;
+                case Pre_Alpha:
+                    jsonGameToAdd["version"] = "Pre_Alpha";
+                    break;
+                case Alfa:
+                    jsonGameToAdd["version"] = "Alfa";
+                    break;
+                case Beta:
+                    jsonGameToAdd["version"] = "Beta";
+                    break;
+                case Release_Candidate:
+                    jsonGameToAdd["version"] = "Release_Candidate";
+                    break;
+                case General_Availability:
+                    jsonGameToAdd["version"] = "General_Availability";
+                    break;
+            }
+
+            jsonGameToAdd["weight"] = game.getWeight();
+            jsonGameToAdd["cost"] = game.getCost();
+
+            userGamesData.append(jsonGameToAdd);
+
+            std::ofstream out(userFileName);
+            if (out.is_open()) {
+                out << userGamesData;
                 out.close();
             } else {
-                cout << "Error opening library file for writing." << endl;
+                std::cout << "Error opening library file for writing." << std::endl;
+                return false;
             }
-            break;
+
+            return true;
         }
     }
-    in.close();
 
     return found;
 }
 
-void updateGameInGamerFile(const vector<Game>& games, const string& filename) {
-    ofstream out(filename);
-    if (out.is_open()) {
-        for (const auto& game : games) {
-            game.saveToFile(out);
+void updateGameInGamerFile(const std::vector<Game>& games, const std::string& filename) {
+    if (games.empty()) {
+        std::cout << "No games to update." << std::endl;
+        return;
+    }
+
+    Json::Value jsonData;
+    for (const auto& game : games) {
+        Json::Value jsonGame;
+        jsonGame["name"] = game.getName();
+        jsonGame["genre"] = game.getGenre();
+
+        // Преобразование версии в строку с пробелами
+        switch (game.getVersion()) {
+            using enum versions;
+            case Pre_Alpha:
+                jsonGame["version"] = "Pre_Alpha";
+            break;
+            case Alfa:
+                jsonGame["version"] = "Alfa";
+            break;
+            case Beta:
+                jsonGame["version"] = "Beta";
+            break;
+            case Release_Candidate:
+                jsonGame["version"] = "Release_Candidate";
+            break;
+            case General_Availability:
+                jsonGame["version"] = "General_Availability";
+            break;
         }
+
+        jsonGame["weight"] = game.getWeight();
+        jsonGame["cost"] = game.getCost();
+        jsonData.append(jsonGame);
+    }
+
+    std::ofstream out(filename);
+    if (out.is_open()) {
+        out << jsonData;
         out.close();
     } else {
-        cout << "Error opening file for writing." << endl;
+        std::cerr << "Error opening file for writing: " << filename << std::endl;
     }
 }
 
-void deleteGameFromGamerFile(const string_view& name, const string& filename) {
-    ifstream in(filename);
-    vector<Game> games;
 
-    if (in.is_open()) {
-        while (in.good()) {
-            Game game = Game::readFromFile(in);
-            if (in.good() && game.getName() != name) {
-                games.push_back(game);
-            }
+void deleteGameFromGamerFile(const std::string_view& name, const std::string& filename) {
+    std::ifstream in(filename);
+
+    if (!in.is_open()) {
+        std::cerr << "Error opening file: " << filename << std::endl;
+        return;
+    }
+
+    std::vector<Game> games;
+    Json::Value jsonData;
+    in >> jsonData;
+
+    bool gameFound = false;
+
+    for (const auto& jsonGame : jsonData) {
+        std::string versionStr = jsonGame["version"].asString();
+        versions version;
+
+        if (versionStr == "Pre_Alpha") {
+            version = versions::Pre_Alpha;
+        } else if (versionStr == "Alfa") {
+            version = versions::Alfa;
+        } else if (versionStr == "Beta") {
+            version = versions::Beta;
+        } else if (versionStr == "Release_Candidate") {
+            version = versions::Release_Candidate;
+        } else if (versionStr == "General_Availability") {
+            version = versions::General_Availability;
+        } else {
+            continue;
         }
-        in.close();
+
+        Game game(
+            jsonGame["name"].asString(),
+            jsonGame["genre"].asString(),
+            version,
+            jsonGame["weight"].asFloat(),
+            jsonGame["cost"].asFloat()
+        );
+
+        if (game.getName() == name) {
+            gameFound = true;
+            continue;
+        }
+
+        games.push_back(game);
+    }
+    in.close();
+
+    if (!gameFound) {
+        std::cout << "Game not found: " << name << std::endl;
     }
 
     updateGameInGamerFile(games, filename);
 }
+

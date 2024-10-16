@@ -3,6 +3,7 @@
 
 #include <QWidget>
 #include <vector>
+#include <memory>
 #include "Game.h"
 
 class MainWindow;
@@ -16,7 +17,7 @@ class DeveloperMenu : public QWidget {
     Q_OBJECT
 
 public:
-    explicit DeveloperMenu(MainWindow *mainWin,EnterWindow *enterWin, QString username, QWidget *parent = nullptr);
+    explicit DeveloperMenu(MainWindow *mainWin, EnterWindow *enterWin, QString username, QWidget *parent = nullptr);
     ~DeveloperMenu() override;
 
     private slots:
@@ -27,9 +28,6 @@ public:
     void on_updateButton_clicked();
     void on_deleteButton_clicked();
     bool updateGameVersion(std::vector<Game> &games, const std::string_view &gameName);
-
-    static std::vector<Game> readGamesFromFile(std::ifstream &in);
-    void updateGamesForAllUsers(const std::string &gameName);
 
 private:
     std::unique_ptr<Ui::DeveloperMenu> ui;

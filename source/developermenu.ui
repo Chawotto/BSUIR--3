@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>724</width>
-    <height>624</height>
+    <width>973</width>
+    <height>666</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -16,8 +16,8 @@
   <widget class="QWidget" name="centralwidget" native="true">
    <property name="geometry">
     <rect>
-     <x>50</x>
-     <y>0</y>
+     <x>180</x>
+     <y>20</y>
      <width>641</width>
      <height>381</height>
     </rect>
@@ -87,9 +87,12 @@
                     }
                 </string>
     </property>
+    <property name="currentText">
+     <string>Pre Alpha</string>
+    </property>
     <item>
      <property name="text">
-      <string>Pre_Alpha</string>
+      <string>Pre Alpha</string>
      </property>
     </item>
     <item>
@@ -122,6 +125,11 @@
       <height>61</height>
      </rect>
     </property>
+    <property name="font">
+     <font>
+      <pointsize>15</pointsize>
+     </font>
+    </property>
     <property name="styleSheet">
      <string>
       QPushButton {
@@ -147,6 +155,11 @@
       <width>201</width>
       <height>61</height>
      </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>15</pointsize>
+     </font>
     </property>
     <property name="styleSheet">
      <string>
@@ -174,6 +187,11 @@
       <height>61</height>
      </rect>
     </property>
+    <property name="font">
+     <font>
+      <pointsize>15</pointsize>
+     </font>
+    </property>
     <property name="styleSheet">
      <string>
       QPushButton {
@@ -199,6 +217,11 @@
       <width>201</width>
       <height>61</height>
      </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>15</pointsize>
+     </font>
     </property>
     <property name="styleSheet">
      <string>
@@ -226,6 +249,11 @@
       <height>61</height>
      </rect>
     </property>
+    <property name="font">
+     <font>
+      <pointsize>15</pointsize>
+     </font>
+    </property>
     <property name="styleSheet">
      <string>
       QPushButton {
@@ -252,6 +280,11 @@
       <height>41</height>
      </rect>
     </property>
+    <property name="font">
+     <font>
+      <pointsize>15</pointsize>
+     </font>
+    </property>
     <property name="styleSheet">
      <string>
       QPushButton {
@@ -269,6 +302,37 @@
      <string>Back</string>
     </property>
    </widget>
+   <widget class="QPushButton" name="devProfileButton">
+    <property name="geometry">
+     <rect>
+      <x>140</x>
+      <y>240</y>
+      <width>201</width>
+      <height>61</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>15</pointsize>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string>
+      QPushButton {
+          background-color: #1ABC9C;
+          color: white;
+          border-radius: 20px;
+          padding: 10px;
+      }
+      QPushButton:hover {
+          background-color: #16A085;
+      }
+     </string>
+    </property>
+    <property name="text">
+     <string>You're Profile</string>
+    </property>
+   </widget>
   </widget>
   <widget class="QStatusBar" name="statusbar">
    <property name="geometry">
@@ -283,8 +347,8 @@
   <widget class="QTextEdit" name="outputTextArea">
    <property name="geometry">
     <rect>
-     <x>40</x>
-     <y>390</y>
+     <x>150</x>
+     <y>440</y>
      <width>631</width>
      <height>201</height>
     </rect>
@@ -293,6 +357,31 @@
     <bool>true</bool>
    </property>
   </widget>
+  <widget class="QLabel" name="backgroundLabel">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>981</width>
+     <height>671</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">  QPushButton {
+          border-radius: 20px;
+      }</string>
+   </property>
+   <property name="pixmap">
+    <pixmap>Images/background.png</pixmap>
+   </property>
+   <property name="scaledContents">
+    <bool>true</bool>
+   </property>
+  </widget>
+  <zorder>backgroundLabel</zorder>
+  <zorder>centralwidget</zorder>
+  <zorder>statusbar</zorder>
+  <zorder>outputTextArea</zorder>
  </widget>
  <resources/>
  <connections/>

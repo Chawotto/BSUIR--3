@@ -1,8 +1,8 @@
 #include "header/registrationwindow.h"
 #include "ui_RegistrationWindow.h"
 #include <QFile>
-#include <QTextStream>
 #include <QMessageBox>
+#include <json/json.h>
 #include "header/User.h"
 #include "header/mainwindow.h"
 
@@ -11,6 +11,9 @@ RegistrationWindow::RegistrationWindow(MainWindow *mainWin, QWidget *parent) :
     ui(std::make_unique<Ui::RegistrationWindow>()),
     mainWindow(mainWin) {
     ui->setupUi(this);
+
+    QPixmap background("C:/Users/alexe/Desktop/MorrsQT/source/Images/background.png");
+    ui->backgroundLabel->setPixmap(background.scaled(ui->backgroundLabel->size(), Qt::KeepAspectRatio, Qt::SmoothTransformation));
 
     connect(ui->saveButton, &QPushButton::clicked, this, &RegistrationWindow::saveUser);
     connect(ui->backButton, &QPushButton::clicked, this, &RegistrationWindow::on_backButton_clicked);
@@ -43,18 +46,36 @@ void RegistrationWindow::saveUser() {
     newUser.setGender(gender.toStdString());
     newUser.setRole(roleToEnum(role));
 
-    QFile file("users.txt");
-    if (file.open(QIODevice::Append | QIODevice::Text)) {
-        QTextStream out(&file);
-        out << QString::fromStdString(newUser.getName()) << ","
-            << QString::fromStdString(password.toStdString()) << ","
-            << newUser.getAge() << ","
-            << QString::fromStdString(newUser.getGender()) << ","
-            << QString::fromStdString(role.toStdString()) << "\n";
+    QFile file("users.json");
+    Json::Value jsonData;
+
+    if (file.open(QIODevice::ReadOnly)) {
+        QByteArray fileData = file.readAll();
+        file.close();
+
+        Json::CharReaderBuilder readerBuilder;
+        std::string errs;
+        std::istringstream s(fileData.toStdString());
+        Json::parseFromStream(readerBuilder, s, &jsonData, &errs);
+    }
+
+    Json::Value jsonUser;
+    jsonUser["name"] = newUser.getName();
+    jsonUser["password"] = password.toStdString();
+    jsonUser["age"] = newUser.getAge();
+    jsonUser["gender"] = newUser.getGender();
+    jsonUser["role"] = role.toStdString();
+
+    jsonData.append(jsonUser);
+
+    if (file.open(QIODevice::WriteOnly | QIODevice::Truncate)) {
+        Json::StreamWriterBuilder writerBuilder;
+        std::string outputConfig = Json::writeString(writerBuilder, jsonData);
+        file.write(QString::fromStdString(outputConfig).toUtf8());
         file.close();
         QMessageBox::information(this, "Saving", "User saved successfully");
     } else {
-        QMessageBox::warning(this, "Error", "Opening file error occupied.");
+        QMessageBox::warning(this, "Error", "Opening file error occurred.");
     }
 }
 

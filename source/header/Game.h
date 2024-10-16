@@ -1,13 +1,14 @@
 #pragma once
 #include <string>
 #include <format>
+#include <json/json.h> // Подключаем jsoncpp
 
 enum class versions {
     Pre_Alpha,
     Alfa,
     Beta,
-    Release_candidate,
-    General_availability
+    Release_Candidate,
+    General_Availability
 };
 
 class Game {
@@ -19,12 +20,16 @@ private:
     float cost;
 
 public:
-    Game(std::string  n, std::string  g, versions v, float w, float c);
+    Game(std::string n, std::string g, versions v, float w, float c)
+        : name(std::move(n)), genre(std::move(g)), version(v), weight(w), cost(c) {}
 
-    void saveToFile(std::ofstream& out) const;
-    static Game readFromFile(std::ifstream& in);
+    virtual ~Game() = default;
 
-    void display() const;
+    void saveToFile(const std::string& filename) const;
+    static Game readFromFile(const std::string& filename);
+
+    virtual void display() const;
+
     void updateVersion(versions newVersion);
 
     [[nodiscard]] std::string getName() const;
@@ -33,7 +38,9 @@ public:
     [[nodiscard]] float getCost() const;
     [[nodiscard]] std::string versionToString() const;
     [[nodiscard]] std::string toString() const;
-
+    [[nodiscard]] versions getVersion() const {
+        return version;
+    }
 
     friend std::ostream& operator<<(std::ostream& os, const Game& game) {
         os << game.toString();

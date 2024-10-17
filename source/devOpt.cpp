@@ -9,6 +9,11 @@
 
 using namespace std;
 
+template<typename T>
+void print(const T& value) {
+    std::cout << value << std::endl;
+}
+
 versions stringToVersion(const std::string& versionStr) {
     using enum versions;
     if (versionStr == "Pre_Alpha") return Pre_Alpha;

@@ -93,6 +93,11 @@ std::string Game::versionToString() const {
     }
 }
 
+template<typename T>
+void displayGameInfo(const T& game) {
+    game.display();
+}
+
 std::string Game::toString() const {
     return std::format("Name: {}, Genre: {}, Version: {}, Weight: {} Gb, Cost: ${}",
                        name, genre, versionToString(), weight, cost);

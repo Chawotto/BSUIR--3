@@ -1,7 +1,6 @@
 #pragma once
 #include <string>
 #include <format>
-#include <json/json.h> // Подключаем jsoncpp
 #include <iostream>
 
 enum class versions {
@@ -51,28 +50,3 @@ public:
 
     bool operator==(const Game& other) const = default;
 };
-
-class RPGGame : public Game {
-public:
-    RPGGame(std::string n, float w, float c)
-        : Game(std::move(n), "RPG", versions::Release_Candidate, w, c) {}
-
-    void display() const override {
-        std::cout << "RPG Game: " << getName() << ", Weight: " << getWeight() << ", Cost: " << getCost() << std::endl;
-    }
-};
-
-class ActionGame : public Game {
-public:
-    ActionGame(std::string n, float w, float c)
-        : Game(std::move(n), "Action", versions::Beta, w, c) {}
-
-    void display() const override {
-        std::cout << "Action Game: " << getName() << ", Weight: " << getWeight() << ", Cost: " << getCost() << std::endl;
-    }
-};
-
-template<typename T>
-void displayGameInfo(const T& game) {
-    game.display();
-}

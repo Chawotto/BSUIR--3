@@ -6,18 +6,9 @@
 #include <iostream>
 #include <vector>
 #include <memory>
+#include "UserExceprion.h"
 
-class UserException : public std::exception {
-private:
-    std::string message;
-
-public:
-    explicit UserException(const std::string& msg) : message(msg) {}
-
-    const char* what() const noexcept override {
-        return message.c_str();
-    }
-};
+class UserException;
 
 enum class userRole {
     Developer,
@@ -80,69 +71,5 @@ public:
     [[nodiscard]] std::string roleAsString() const;
 };
 
-class DeveloperUser : public User {
-public:
-    DeveloperUser(std::string userName, int userAge, std::string userGender)
-        : User(std::move(userName), userAge, std::move(userGender), userRole::Developer) {}
-
-    void displayInfo() const override {
-        std::cout << "Developer Info: ";
-        User::displayInfo();
-    }
-};
-
-class GamerUser : public User {
-public:
-    GamerUser(std::string userName, int userAge, std::string userGender)
-        : User(std::move(userName), userAge, std::move(userGender), userRole::Gamer) {}
-
-    void displayInfo() const override {
-        std::cout << "Gamer Info: ";
-        User::displayInfo();
-    }
-};
-
-class AdminUser : public User {
-public:
-    AdminUser(std::string userName, int userAge, std::string userGender)
-        : User(std::move(userName), userAge, std::move(userGender), userRole::Administrator) {}
-
-    void displayInfo() const override {
-        std::cout << "Admin Info: ";
-        User::displayInfo();
-    }
-};
-
-template<typename T>
-class UserContainer {
-private:
-    std::vector<std::shared_ptr<T>> users;
-
-public:
-    void addUser(const std::shared_ptr<T>& user) {
-        users.push_back(user);
-    }
-
-    void displayAll() const {
-        for (const auto& user : users) {
-            user->displayInfo();
-        }
-    }
-};
-
 #endif // USER_H
-
-//void exampleUsage() {
-    //UserContainer<User> userContainer;
-
-    //auto devUser = std::make_shared<DeveloperUser>("Alice", 30, "Female");
-    //auto gamerUser = std::make_shared<GamerUser>("Bob", 25, "Male");
-    //auto adminUser = std::make_shared<AdminUser>("Charlie", 35, "Other");
-
-    //userContainer.addUser(devUser);
-    //userContainer.addUser(gamerUser);
-    //userContainer.addUser(adminUser);
-
-    //userContainer.displayAll();
-//}
 USER_H

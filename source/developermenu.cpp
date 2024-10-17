@@ -15,8 +15,7 @@ DeveloperMenu::DeveloperMenu(MainWindow *mainWin, EnterWindow *enterWin, QString
     ui(std::make_unique<Ui::DeveloperMenu>()),
     mainWindow(mainWin),
     enterWindow(enterWin),
-    currentUser(std::move(username)),
-    gameCollection() {
+    currentUser(std::move(username)) {
     ui->setupUi(this);
     ui->deleteButton->setVisible(false);
     ui->updateButton->setVisible(false);

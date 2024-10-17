@@ -1,8 +1,19 @@
 #include "header/Game.h"
 #include <fstream>
-#include <iostream>
 #include <utility>
 #include <json/json.h>
+
+class GameException : public std::exception {
+private:
+    std::string message;
+
+public:
+    explicit GameException(const std::string& msg) : message(msg) {}
+
+    const char* what() const noexcept override {
+        return message.c_str();
+    }
+};
 
 void Game::saveToFile(const std::string& filename) const {
     Json::Value jsonData;
@@ -12,49 +23,36 @@ void Game::saveToFile(const std::string& filename) const {
     jsonData["weight"] = weight;
     jsonData["cost"] = cost;
 
-    if (std::ofstream out(filename); out.is_open()) {
-        out << jsonData;
-        out.close();
-    } else {
-        std::cerr << "Error opening file." << std::endl;
+    std::ofstream out(filename);
+    if (!out.is_open()) {
+        throw GameException("Error opening file: " + filename);
     }
+
+    out << jsonData;
 }
 
 Game Game::readFromFile(const std::string& filename) {
-    using enum versions;
     Json::Value jsonData;
-    if (std::ifstream in(filename); in.is_open()) {
-        in >> jsonData;
-        in.close();
+    std::ifstream in(filename);
+    if (!in.is_open()) {
+        throw GameException("Error opening file: " + filename);
     }
 
-    const std::string versionStr = jsonData["version"].asString();
+    in >> jsonData;
 
-    versions version;
-    if (versionStr == "Pre_Alpha") {
-        version = Pre_Alpha;
-    } else if (versionStr == "Alfa") {
-        version = Alfa;
-    } else if (versionStr == "Beta") {
-        version = Beta;
-    } else if (versionStr == "Release_Candidate") {
-        version = Release_Candidate;
-    } else if (versionStr == "General_Availability") {
-        version = General_Availability;
-    } else {
-        throw std::runtime_error(versionStr + "Unknown version in file: ");
+    if (!jsonData.isMember("version")) {
+        throw GameException("Version is missing in the JSON data.");
     }
 
-    return {jsonData["name"].asString(),
-            jsonData["genre"].asString(),
-            version,
-            jsonData["weight"].asFloat(),
-            jsonData["cost"].asFloat()};
-}
+    auto version = static_cast<versions>(jsonData["version"].asInt());
 
-
-void Game::display() const {
-    std::cout << toString() << std::endl;
+    return {
+        jsonData["name"].asString(),
+        jsonData["genre"].asString(),
+        version,
+        jsonData["weight"].asFloat(),
+        jsonData["cost"].asFloat()
+    };
 }
 
 void Game::updateVersion(versions newVersion) {

@@ -38,16 +38,14 @@ add_executable(MorrsQT
         source/registrationwindow.cpp
         source/header/registrationwindow.h
         source/registrationwindow.ui
-        source/DeveloperUser.cpp
-        source/header/DeveloperUser.h
-        source/gamerUser.cpp
-        source/header/gamerUser.h
         source/devprofile.cpp
         source/header/devprofile.h
         source/devprofile.ui
         source/gameprofile.cpp
         source/header/gameprofile.h
         source/gameprofile.ui
+        source/header/GameException.h
+        source/header/UserExceprion.h
 )
 
 target_link_libraries(MorrsQT

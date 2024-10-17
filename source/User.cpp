@@ -3,8 +3,6 @@
 
 using namespace std;
 
-User::~User() = default;
-
 void User::setName(const string_view& userName) {
     name = userName;
 }

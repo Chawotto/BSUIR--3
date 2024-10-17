@@ -15,12 +15,11 @@ DeveloperMenu::DeveloperMenu(MainWindow *mainWin, EnterWindow *enterWin, QString
     ui(std::make_unique<Ui::DeveloperMenu>()),
     mainWindow(mainWin),
     enterWindow(enterWin),
-    currentUser(std::move(username)) {
+    currentUser(std::move(username)),
+    gameCollection() {
     ui->setupUi(this);
     ui->deleteButton->setVisible(false);
     ui->updateButton->setVisible(false);
-
-    gameCollection = GameCollection();
 
     QPixmap background("C:/Users/alexe/Desktop/MorrsQT/source/Images/background.png");
     ui->backgroundLabel->setPixmap(background.scaled(ui->backgroundLabel->size(), Qt::KeepAspectRatio, Qt::SmoothTransformation));

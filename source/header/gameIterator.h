@@ -22,6 +22,6 @@ public:
 private:
     const GameCollection& collection;
     size_t index = 0;
-    bool isConst;
+    bool isConst = false;
 };
 

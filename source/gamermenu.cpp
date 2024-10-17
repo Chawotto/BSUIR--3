@@ -142,27 +142,26 @@ void GamerMenu::on_findGameButton_clicked() {
     }
 
     QString foundGamesList;
-    std::vector<Game> foundGames; // Вектор для хранения найденных игр
+    std::vector<Game> localFoundGames;
     for (const auto &game : games) {
         if (game.getName().contains(name.toStdString())) {
             found = true;
             QString foundGameDetails = formatGameGamer(game);
             foundGamesList += foundGameDetails;
-            foundGames.push_back(game); // Добавляем найденную игру в вектор
+            localFoundGames.push_back(game);
         }
     }
 
     if (found) {
         ui->outputTextArea->setHtml(foundGamesList);
         ui->deleteButton->setVisible(true);
-        ui->gameListButton->setVisible(true); // Показываем кнопку gameList
-        // Сохраняем найденные игры в атрибут класса, если нужно
-        this->foundGames = foundGames; // Предполагается, что вы добавили атрибут foundGames в класс
+        ui->gameListButton->setVisible(true);
+        this->foundGames = localFoundGames;
     } else {
         QMessageBox::warning(this, "Not Found", "No games found with the specified name.");
         ui->outputTextArea->clear();
         ui->deleteButton->setVisible(false);
-        ui->gameListButton->setVisible(false); // Скрываем кнопку gameList
+        ui->gameListButton->setVisible(false);
     }
 }
 

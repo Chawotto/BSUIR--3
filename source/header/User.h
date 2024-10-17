@@ -4,9 +4,7 @@
 #include <string>
 #include <utility>
 #include <iostream>
-#include <vector>
-#include <memory>
-#include "UserExceprion.h"
+#include "UserException.h"
 
 class UserException;
 

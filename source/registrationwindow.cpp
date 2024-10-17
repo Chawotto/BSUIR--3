@@ -5,6 +5,7 @@
 #include <json/json.h>
 #include "header/User.h"
 #include "header/mainwindow.h"
+#include "header/UserException.h"
 
 RegistrationWindow::RegistrationWindow(MainWindow *mainWin, QWidget *parent) :
     QWidget(parent),
@@ -22,60 +23,62 @@ RegistrationWindow::RegistrationWindow(MainWindow *mainWin, QWidget *parent) :
 RegistrationWindow::~RegistrationWindow() = default;
 
 void RegistrationWindow::saveUser() {
-    QString name = ui->nameLineEdit->text();
+    try {
+        QString name = ui->nameLineEdit->text();
 
-    bool ageOk;
-    int age = ui->ageLineEdit->text().toInt(&ageOk);
-    if (!ageOk || age <= 0) {
-        QMessageBox::warning(this, "Error", "Enter age correctly.");
-        return;
-    }
+        bool ageOk;
+        int age = ui->ageLineEdit->text().toInt(&ageOk);
+        if (!ageOk || age <= 0) {
+            throw UserException("Enter age correctly.");
+        }
 
-    QString password = ui->passwordLineEdit->text();
-    if (password.isEmpty()) {
-        QMessageBox::warning(this, "Error", "Password cannot be empty.");
-        return;
-    }
+        QString password = ui->passwordLineEdit->text();
+        if (password.isEmpty()) {
+            throw UserException("Password can't be empty.");
+        }
 
-    QString gender = ui->genderComboBox->currentText();
-    QString role = ui->roleComboBox->currentText();
+        QString gender = ui->genderComboBox->currentText();
+        QString role = ui->roleComboBox->currentText();
 
-    User newUser;
-    newUser.setName(name.toStdString());
-    newUser.setAge(age);
-    newUser.setGender(gender.toStdString());
-    newUser.setRole(roleToEnum(role));
+        User newUser;
+        newUser.setName(name.toStdString());
+        newUser.setAge(age);
+        newUser.setGender(gender.toStdString());
+        newUser.setRole(roleToEnum(role));
 
-    QFile file("users.json");
-    Json::Value jsonData;
+        QFile file("users.json");
+        Json::Value jsonData;
 
-    if (file.open(QIODevice::ReadOnly)) {
-        QByteArray fileData = file.readAll();
-        file.close();
+        if (file.open(QIODevice::ReadOnly)) {
+            QByteArray fileData = file.readAll();
+            file.close();
 
-        Json::CharReaderBuilder readerBuilder;
-        std::string errs;
-        std::istringstream s(fileData.toStdString());
-        Json::parseFromStream(readerBuilder, s, &jsonData, &errs);
-    }
+            Json::CharReaderBuilder readerBuilder;
+            std::string errs;
+            std::istringstream s(fileData.toStdString());
+            parseFromStream(readerBuilder, s, &jsonData, &errs);
+        }
 
-    Json::Value jsonUser;
-    jsonUser["name"] = newUser.getName();
-    jsonUser["password"] = password.toStdString();
-    jsonUser["age"] = newUser.getAge();
-    jsonUser["gender"] = newUser.getGender();
-    jsonUser["role"] = role.toStdString();
+        Json::Value jsonUser;
+        jsonUser["name"] = newUser.getName();
+        jsonUser["password"] = password.toStdString();
+        jsonUser["age"] = newUser.getAge();
+        jsonUser["gender"] = newUser.getGender();
+        jsonUser["role"] = role.toStdString();
 
-    jsonData.append(jsonUser);
+        jsonData.append(jsonUser);
 
-    if (file.open(QIODevice::WriteOnly | QIODevice::Truncate)) {
-        Json::StreamWriterBuilder writerBuilder;
-        std::string outputConfig = Json::writeString(writerBuilder, jsonData);
-        file.write(QString::fromStdString(outputConfig).toUtf8());
-        file.close();
-        QMessageBox::information(this, "Saving", "User saved successfully");
-    } else {
-        QMessageBox::warning(this, "Error", "Opening file error occurred.");
+        if (file.open(QIODevice::WriteOnly | QIODevice::Truncate)) {
+            Json::StreamWriterBuilder writerBuilder;
+            std::string outputConfig = Json::writeString(writerBuilder, jsonData);
+            file.write(QString::fromStdString(outputConfig).toUtf8());
+            file.close();
+            QMessageBox::information(this, "Saving", "User saved successfully.");
+        } else {
+            throw UserException("Error file opening.");
+        }
+    } catch (const UserException &ex) {
+        QMessageBox::warning(this, "Error.", ex.what());
     }
 }
 

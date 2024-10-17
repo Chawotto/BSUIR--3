@@ -45,7 +45,7 @@ add_executable(MorrsQT
         source/header/gameprofile.h
         source/gameprofile.ui
         source/header/GameException.h
-        source/header/UserExceprion.h
+        source/header/UserException.h
         source/DeveloperUser.cpp
         source/GamerUser.cpp
         source/header/GamerUser.h
@@ -56,6 +56,10 @@ add_executable(MorrsQT
         source/header/RPGGame.h
         source/ActionGame.cpp
         source/header/ActionGame.h
+        source/header/gamecollection.h
+        source/gamecollection.cpp
+        source/gameIterator.cpp
+        source/header/gameIterator.h
 )
 
 target_link_libraries(MorrsQT

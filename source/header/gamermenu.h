@@ -2,6 +2,7 @@
 #define GAMERMENU_H
 
 #include <QWidget>
+#include "Game.h"
 
 class MainWindow;
 class EnterWindow;
@@ -18,6 +19,7 @@ public:
     ~GamerMenu() override;
 
     private slots:
+    void on_gameListButton_clicked();
     void on_buyButton_clicked();
     void on_readLibraryButton_clicked();
     void on_findGameButton_clicked();
@@ -29,6 +31,7 @@ private:
     MainWindow *mainWindow;
     EnterWindow *enterWindow;
     QString currentUser;
+    std::vector<Game> foundGames;
 };
 
 #endif // GAMERMENU_H

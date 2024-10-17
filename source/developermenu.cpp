@@ -7,6 +7,8 @@
 #include "header/Game.h"
 #include "header/mainwindow.h"
 #include <json/json.h>
+#include "header/gamecollection.h"
+#include "header/gameIterator.h"
 
 DeveloperMenu::DeveloperMenu(MainWindow *mainWin, EnterWindow *enterWin, QString username, QWidget *parent) :
     QWidget(parent),
@@ -17,6 +19,8 @@ DeveloperMenu::DeveloperMenu(MainWindow *mainWin, EnterWindow *enterWin, QString
     ui->setupUi(this);
     ui->deleteButton->setVisible(false);
     ui->updateButton->setVisible(false);
+
+    gameCollection = GameCollection();
 
     QPixmap background("C:/Users/alexe/Desktop/MorrsQT/source/Images/background.png");
     ui->backgroundLabel->setPixmap(background.scaled(ui->backgroundLabel->size(), Qt::KeepAspectRatio, Qt::SmoothTransformation));
@@ -98,9 +102,9 @@ void DeveloperMenu::on_createButton_clicked() {
     int versionIndex = versionComboBox.findText(selectedItem);
     auto selectedVersion = static_cast<versions>(versionIndex);
 
-    double weight = QInputDialog::getDouble(this, "Create Game", "Enter game weight (Gb):", 0.0, 0.0, 100.0, 1, &ok);
+    double weight = QInputDialog::getDouble(this, "Create Game", "Enter game weight (Gb):", 0.0, 0.0, 10000.0, 1, &ok);
     if (!ok) return;
-    double cost = QInputDialog::getDouble(this, "Create Game", "Enter game cost ($):", 0.0, 0.0, 1000.0, 1, &ok);
+    double cost = QInputDialog::getDouble(this, "Create Game", "Enter game cost ($):", 0.0, 0.0, 1000000.0, 1, &ok);
     if (!ok) return;
 
     Game game(name.toStdString(), genre.toStdString(), selectedVersion, static_cast<float>(weight), static_cast<float>(cost));
@@ -149,13 +153,18 @@ std::vector<Game> readGamesFromFile(const std::string& fileName) {
     return games;
 }
 
-void DeveloperMenu::on_readGamesButton_clicked() const {
+void DeveloperMenu::on_readGamesButton_clicked() {
     QString gamesList;
     QString userFileName = currentUser + ".json";
 
     std::vector<Game> games = readGamesFromFile(userFileName.toStdString());
+    for (const auto& game : games) {
+        gameCollection.addGame(game);
+    }
 
-    for (const auto &game : games) {
+    GameIterator iterator(gameCollection);
+    while (iterator.hasNext()) {
+        Game game = iterator.next();
         gamesList += formatGame(game);
     }
 

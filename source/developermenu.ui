@@ -119,8 +119,8 @@
    <widget class="QPushButton" name="createButton">
     <property name="geometry">
      <rect>
-      <x>140</x>
-      <y>170</y>
+      <x>80</x>
+      <y>180</y>
       <width>201</width>
       <height>61</height>
      </rect>
@@ -150,8 +150,8 @@
    <widget class="QPushButton" name="findButton">
     <property name="geometry">
      <rect>
-      <x>360</x>
-      <y>170</y>
+      <x>300</x>
+      <y>180</y>
       <width>201</width>
       <height>61</height>
      </rect>
@@ -181,8 +181,8 @@
    <widget class="QPushButton" name="readGamesButton">
     <property name="geometry">
      <rect>
-      <x>360</x>
-      <y>240</y>
+      <x>300</x>
+      <y>250</y>
       <width>201</width>
       <height>61</height>
      </rect>
@@ -212,8 +212,8 @@
    <widget class="QPushButton" name="deleteButton">
     <property name="geometry">
      <rect>
-      <x>140</x>
-      <y>310</y>
+      <x>80</x>
+      <y>320</y>
       <width>201</width>
       <height>61</height>
      </rect>
@@ -243,8 +243,8 @@
    <widget class="QPushButton" name="updateButton">
     <property name="geometry">
      <rect>
-      <x>360</x>
-      <y>310</y>
+      <x>300</x>
+      <y>320</y>
       <width>201</width>
       <height>61</height>
      </rect>
@@ -271,42 +271,11 @@
      <string>Update Game</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="backButton">
-    <property name="geometry">
-     <rect>
-      <x>10</x>
-      <y>320</y>
-      <width>111</width>
-      <height>41</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <pointsize>15</pointsize>
-     </font>
-    </property>
-    <property name="styleSheet">
-     <string>
-      QPushButton {
-          background-color: #F39C12;
-          color: white;
-          border-radius: 20px;
-          padding: 10px;
-      }
-      QPushButton:hover {
-          background-color: #E67E22;
-      }
-     </string>
-    </property>
-    <property name="text">
-     <string>Back</string>
-    </property>
-   </widget>
    <widget class="QPushButton" name="devProfileButton">
     <property name="geometry">
      <rect>
-      <x>140</x>
-      <y>240</y>
+      <x>80</x>
+      <y>250</y>
       <width>201</width>
       <height>61</height>
      </rect>
@@ -331,6 +300,37 @@
     </property>
     <property name="text">
      <string>You're Profile</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="backButton">
+    <property name="geometry">
+     <rect>
+      <x>530</x>
+      <y>340</y>
+      <width>111</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>15</pointsize>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string>
+      QPushButton {
+          background-color: #F39C12;
+          color: white;
+          border-radius: 20px;
+          padding: 10px;
+      }
+      QPushButton:hover {
+          background-color: #E67E22;
+      }
+     </string>
+    </property>
+    <property name="text">
+     <string>Back</string>
     </property>
    </widget>
   </widget>

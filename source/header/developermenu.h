@@ -5,6 +5,7 @@
 #include <vector>
 #include <memory>
 #include "Game.h"
+#include "gamecollection.h"
 
 class MainWindow;
 class EnterWindow;
@@ -22,7 +23,7 @@ public:
 
     private slots:
     void on_createButton_clicked();
-    void on_readGamesButton_clicked() const;
+    void on_readGamesButton_clicked();
     void on_findButton_clicked();
     void on_backButton_clicked();
     void on_updateButton_clicked();
@@ -34,6 +35,7 @@ private:
     MainWindow *mainWindow;
     EnterWindow *enterWindow;
     QString currentUser;
+    GameCollection gameCollection;
 };
 
 #endif // DEVELOPERMENU_H

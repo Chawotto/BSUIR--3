@@ -90,8 +90,6 @@ void GamerMenu::on_readLibraryButton_clicked() {
     }
 }
 
-
-
 void GamerMenu::on_findGameButton_clicked() {
     QString name = ui->gameNameInput->text();
 
@@ -143,21 +141,55 @@ void GamerMenu::on_findGameButton_clicked() {
         return;
     }
 
+    QString foundGamesList;
+    std::vector<Game> foundGames; // Вектор для хранения найденных игр
     for (const auto &game : games) {
-        if (game.getName() == name.toStdString()) {
+        if (game.getName().contains(name.toStdString())) {
             found = true;
             QString foundGameDetails = formatGameGamer(game);
-            ui->outputTextArea->setHtml(foundGameDetails);
-            ui->deleteButton->setVisible(true);
-            break;
+            foundGamesList += foundGameDetails;
+            foundGames.push_back(game); // Добавляем найденную игру в вектор
         }
     }
 
-    if (!found) {
-        QMessageBox::warning(this, "Not Found", "Invalid game name.");
+    if (found) {
+        ui->outputTextArea->setHtml(foundGamesList);
+        ui->deleteButton->setVisible(true);
+        ui->gameListButton->setVisible(true); // Показываем кнопку gameList
+        // Сохраняем найденные игры в атрибут класса, если нужно
+        this->foundGames = foundGames; // Предполагается, что вы добавили атрибут foundGames в класс
+    } else {
+        QMessageBox::warning(this, "Not Found", "No games found with the specified name.");
         ui->outputTextArea->clear();
         ui->deleteButton->setVisible(false);
+        ui->gameListButton->setVisible(false); // Скрываем кнопку gameList
     }
+}
+
+void GamerMenu::on_gameListButton_clicked() {
+    QString userFileName = currentUser + "_foundGames.json";
+    Json::Value jsonData;
+
+    for (const auto &game : foundGames) {
+        Json::Value jsonGame;
+        jsonGame["name"] = game.getName();
+        jsonGame["genre"] = game.getGenre();
+        jsonGame["version"] = game.versionToString();
+        jsonGame["weight"] = game.getWeight();
+        jsonGame["cost"] = game.getCost();
+
+        jsonData.append(jsonGame);
+    }
+
+    std::ofstream out(userFileName.toStdString());
+    if (!out.is_open()) {
+        QMessageBox::critical(this, "Error", "Error opening file for writing.");
+        return;
+    }
+    out << jsonData;
+    out.close();
+
+    QMessageBox::information(this, "Success", "Game list saved successfully as " + userFileName);
 }
 
 void GamerMenu::on_deleteButton_clicked() {

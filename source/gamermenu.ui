@@ -253,6 +253,37 @@
      <string>You're Profile</string>
     </property>
    </widget>
+   <widget class="QPushButton" name="gameListButton">
+    <property name="geometry">
+     <rect>
+      <x>70</x>
+      <y>240</y>
+      <width>201</width>
+      <height>61</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>15</pointsize>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string>
+      QPushButton {
+          background-color: #E74C3C;
+          color: white;
+          border-radius: 20px;
+          padding: 10px;
+      }
+      QPushButton:hover {
+          background-color: #C0392B;
+      }
+     </string>
+    </property>
+    <property name="text">
+     <string>Create List</string>
+    </property>
+   </widget>
   </widget>
   <widget class="QStatusBar" name="statusbar">
    <property name="geometry">
